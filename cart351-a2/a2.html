@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title> Picking flowers </title>
+  <style>
+  body{
+    margin:0;
+    padding:0;
+  }
+  canvas
+  {
+    background:black;
+    margin:0;
+    padding:0;
+  }
+  </style>
+  <script>
+
+  window.onload = function(){
+
+    let canvas= document.getElementById('testCanvas');
+    let canvasContext = canvas.getContext('2d');
+
+
+    // flowers Constructor
+
+    function flowers(x, y, nom)
+    {
+      this.xPos=x;
+      this.yPos=y;
+      this.name=nom;
+
+      this.removeFlower=function(){
+
+      }
+
+      this.addFlower=function(){
+
+      }
+    }
+  }//end window onload
+    </script>
+  </head>
+  <body>
+  <canvas id="testCanvas" width="500" height="500">
+
+  </canvas>
+  </body>
+  </html>
