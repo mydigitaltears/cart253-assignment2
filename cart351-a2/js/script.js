@@ -4,8 +4,8 @@ let avatarY;
 let avatarVX = 0;
 let avatarVY = 0;
 let avatarSpeed = 2;
-let avatarWidth = 50;
-let avatarHeight = 50;
+let avatarWidth = 40;
+let avatarHeight = 40;
 let myAvatar;
 let orientation;
 
@@ -41,7 +41,7 @@ function draw() {
   background("green");
   handleInput();
   stop();
-  //drawAvatar();
+  drawAvatar();
   moveAvatar();
   drawSprites();
   myAvatar.position.x = avatarX;
