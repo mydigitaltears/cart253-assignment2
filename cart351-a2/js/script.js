@@ -37,6 +37,7 @@ function setup() {
 }
 
 function draw() {
+  createCanvas(windowWidth,windowHeight);
   background("green");
   handleInput();
   stop();
@@ -51,19 +52,15 @@ function draw() {
 function keyPressed() {
   if (keyCode === LEFT_ARROW){
     myAvatar.addAnimation("default", animLEFT);
-    orientation = "LEFT";
   }
   else if (keyCode === RIGHT_ARROW){
     myAvatar.addAnimation("default", animRIGHT);
-    orientation = "RIGHT";
   }
   else if (keyCode === DOWN_ARROW){
     myAvatar.addAnimation("default", animDOWN);
-    orientation = "DOWN";
   }
   else if (keyCode === UP_ARROW){
     myAvatar.addAnimation("default", animUP);
-    orientation = "UP";
   }
 }
 
@@ -90,9 +87,11 @@ function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(LEFT_ARROW)) {
     avatarVX = -avatarSpeed;
+    orientation = "LEFT";
   }
   else if (keyIsDown(RIGHT_ARROW)) {
     avatarVX = avatarSpeed;
+    orientation = "RIGHT";
   }
   else {
     avatarVX = 0;
@@ -101,9 +100,11 @@ function handleInput() {
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
     avatarVY = -avatarSpeed;
+    orientation = "UP";
   }
   else if (keyIsDown(DOWN_ARROW)) {
     avatarVY = avatarSpeed;
+    orientation = "DOWN";
   }
   else {
     avatarVY = 0;
@@ -123,6 +124,18 @@ function drawAvatar(){
 function moveAvatar(){
   avatarX += avatarVX;
   avatarY += avatarVY;
+  if (avatarX < 0){
+    avatarX = 0;
+  }
+  if (avatarX > width){
+    avatarX = width;
+  }
+  if (avatarY < 0){
+    avatarY = 0;
+  }
+  if (avatarY > height){
+    avatarY = height;
+  }
 }
 
 
