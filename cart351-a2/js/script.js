@@ -4,27 +4,77 @@ let avatarY;
 let avatarVX = 0;
 let avatarVY = 0;
 let avatarSpeed = 2;
-let avatarRadius  = 50;
+let avatarWidth = 50;
+let avatarHeight = 50;
+let myAvatar;
 
 
 function preload() {
-
+  animSUP = loadAnimation("assets/images/avatarI_0010.png");
+  animSDOWN = loadAnimation("assets/images/avatarI_0001.png");
+  animSLEFT = loadAnimation("assets/images/avatarI_0004.png");
+  animSRIGHT = loadAnimation("assets/images/avatarI_0007.png");
+  animUP = loadAnimation("assets/images/avatarI_0011.png","assets/images/avatarI_0010.png",
+  "assets/images/avatarI_0012.png","assets/images/avatarI_0010.png");
+  animDOWN = loadAnimation("assets/images/avatarI_0002.png","assets/images/avatarI_0001.png",
+  "assets/images/avatarI_0003.png","assets/images/avatarI_0001.png");
+  animLEFT = loadAnimation("assets/images/avatarI_0005.png","assets/images/avatarI_0004.png",
+  "assets/images/avatarI_0006.png","assets/images/avatarI_0004.png");
+  animRIGHT = loadAnimation("assets/images/avatarI_0008.png","assets/images/avatarI_0007.png",
+  "assets/images/avatarI_0009.png","assets/images/avatarI_0007.png");
 }
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
   background("green");
   imageMode(CENTER);
-
   setupAvatar();
+  myAvatar = createSprite(avatarX, avatarY, 40, 40);
+  myAvatar.addAnimation("default", animSDOWN);
+  myAvatar.shapeColor = color(255);
+  myAvatar.velocity.y = 0;
 }
 
 function draw() {
   background("green");
   handleInput();
-  drawAvatar();
+  //drawAvatar();
   moveAvatar();
+  drawSprites();
+  myAvatar.position.x = avatarX;
+  myAvatar.position.y = avatarY;
 }
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW){
+    myAvatar.addAnimation("default", animLEFT);
+  }
+  if (keyCode === RIGHT_ARROW){
+    myAvatar.addAnimation("default", animRIGHT);
+  }
+  if (keyCode === DOWN_ARROW){
+    myAvatar.addAnimation("default", animDOWN);
+  }
+  if (keyCode === UP_ARROW){
+    myAvatar.addAnimation("default", animUP);
+  }
+}
+
+function keyReleased() {
+  if (keyCode === LEFT_ARROW){
+    myAvatar.addAnimation("default", animSLEFT);
+  }
+  if (keyCode === RIGHT_ARROW){
+    myAvatar.addAnimation("default", animSRIGHT);
+  }
+  if (keyCode === DOWN_ARROW){
+    myAvatar.addAnimation("default", animSDOWN);
+  }
+  if (keyCode === UP_ARROW){
+    myAvatar.addAnimation("default", animSUP);
+  }
+}
+
 
 //inputs
 function handleInput() {
@@ -58,7 +108,7 @@ function setupAvatar(){
 }
 
 function drawAvatar(){
-  ellipse(avatarX,avatarY,avatarRadius,avatarRadius);
+  ellipse(avatarX,avatarY,avatarWidth,avatarHeight);
 }
 
 function moveAvatar(){
