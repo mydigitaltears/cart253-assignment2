@@ -8,9 +8,11 @@ let avatarWidth = 40;
 let avatarHeight = 40;
 let myAvatar;
 let orientation;
+let pinkFlower;
 
 
 function preload() {
+  pinkFlower = loadImage("assets/images/pinkF.png");
   animSUP = loadAnimation("assets/images/avatarI_0010.png");
   animSDOWN = loadAnimation("assets/images/avatarI_0001.png");
   animSLEFT = loadAnimation("assets/images/avatarI_0004.png");
@@ -41,13 +43,15 @@ function draw() {
   background("green");
   handleInput();
   stop();
-  drawAvatar();
+  //drawAvatar();
   moveAvatar();
   drawSprites();
   myAvatar.position.x = avatarX;
   myAvatar.position.y = avatarY;
   console.log(orientation);
   flower1.drawFlower();
+  bflower1.drawbFlower();
+  bflower2.drawbFlower();
 }
 
 function keyPressed() {
@@ -141,10 +145,12 @@ function moveAvatar(){
 
 
 // creating some flowers
-let flower1= new flowers(20,30,"marguerite");
-let flower2= new flowers(0,1,"tulipe");
-let flower3= new flowers(0,1,"tournesol");
+let flower1= new flowers(20,30,30,60,"marguerite");
+let flower2= new flowers(50,100,30,60,"tulipe");
+let flower3= new flowers(200,150,30,60,"tournesol");
 
+let bflower1= new bflowers(15,5,20,50,"allo");
+let bflower2= new bflowers(20,10,20,50,"allo")
 
 //Adding flowers to bouquet
 let bouquet=[];
@@ -154,15 +160,32 @@ if(event)
 {
   bouquet.push();
 }
+
+function bflowers(x, y ,w, h, nom){
+  this.xPos=x;
+  this.yPos=y;
+  this.width=w;
+  this.height=h;
+  this.name=nom;
+
+  this.drawbFlower = function() {
+    //rect(this.xPos+avatarX,this.yPos+avatarY,this.width,this.height);
+    image(pinkFlower, this.xPos+avatarX, this.yPos+avatarY, this.width, this.height);
+  }
+}
+
 // flowers Constructor
 
-function flowers(x, y, nom)
+function flowers(x, y, w, h, nom)
 {
   this.xPos=x;
   this.yPos=y;
+  this.width=w;
+  this.height=h;
   this.name=nom;
 
   this.removeFlower=function(){
+    let d = dist(avatarX, avatarY, this.width,this.height);
 
   }
 
@@ -171,7 +194,7 @@ function flowers(x, y, nom)
   }
 
   this.drawFlower = function() {
-    ellipse(this.xPos, this.yPos, 20,20);
+    image(pinkFlower, this.xPos, this.yPos, this.width, this.height);
   }
 
 }
