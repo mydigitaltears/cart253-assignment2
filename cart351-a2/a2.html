@@ -1,5 +1,13 @@
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+
+  <!-- Library script(s) -->
+  <script src="js/libraries/p5.min.js"></script>
+  <script src="js/libraries/p5.sound.min.js"></script>
+
   <title> Picking flowers </title>
   <style>
   body{
@@ -20,47 +28,60 @@
   </style>
   <script>
 
+  function preload() {
 
-  window.onload = function(){
+  }
 
-    //Code to resize canvas to window size
-    (function() {
-			var
-				// Obtain a reference to the canvas element
-				// using its id.
-				htmlCanvas = document.getElementById('testCanvas'),
+  function setup() {
+    createCanvas(windowWidth,windowHeight);
+    background("#ffff00");
+    imageMode(CENTER);
+  }
 
-			  	// Obtain a graphics context on the
-			  	// canvas element for drawing.
-			  	canvasContext = htmlCanvas.getContext('2d');
+  function draw() {
 
-			// Start listening to resize events and
-			// draw canvas.
-			initialize();
+  }
 
-			function initialize() {
-				// Register an event listener to
-				// call the resizeCanvas() function each time
-				// the window is resized.
-				window.addEventListener('resize', resizeCanvas, false);
-
-				// Draw canvas border for the first time.
-				resizeCanvas();
-			}
-
-			// Display custom canvas.
-			// In this case it's a blue, 5 pixel border that
-			// resizes along with the browser window.
-
-			// Runs each time the DOM window resize event fires.
-			// Resets the canvas dimensions to match window,
-			// then draws the new borders accordingly.
-			function resizeCanvas() {
-				htmlCanvas.width = window.innerWidth;
-				htmlCanvas.height = window.innerHeight;
-			}
-
-		})(); // end of canvas resize code
+  // window.onload = function(){
+  //
+  //   //Code to resize canvas to window size
+  //   (function() {
+	// 		var
+	// 			// Obtain a reference to the canvas element
+	// 			// using its id.
+	// 			htmlCanvas = document.getElementById('testCanvas'),
+  //
+	// 		  	// Obtain a graphics context on the
+	// 		  	// canvas element for drawing.
+	// 		  	canvasContext = htmlCanvas.getContext('2d');
+  //
+	// 		// Start listening to resize events and
+	// 		// draw canvas.
+	// 		initialize();
+  //
+	// 		function initialize() {
+	// 			// Register an event listener to
+	// 			// call the resizeCanvas() function each time
+	// 			// the window is resized.
+	// 			window.addEventListener('resize', resizeCanvas, false);
+  //
+	// 			// Draw canvas border for the first time.
+	// 			resizeCanvas();
+	// 		}
+  //
+	// 		// Display custom canvas.
+	// 		// In this case it's a blue, 5 pixel border that
+	// 		// resizes along with the browser window.
+  //
+	// 		// Runs each time the DOM window resize event fires.
+	// 		// Resets the canvas dimensions to match window,
+	// 		// then draws the new borders accordingly.
+	// 		function resizeCanvas() {
+	// 			htmlCanvas.width = window.innerWidth;
+	// 			htmlCanvas.height = window.innerHeight;
+	// 		}
+  //
+	// 	})(); // end of canvas resize code
 
     //general code
     let canvas= document.getElementById('testCanvas');
