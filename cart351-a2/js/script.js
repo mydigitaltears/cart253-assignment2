@@ -7,6 +7,7 @@ let avatarSpeed = 2;
 let avatarWidth = 50;
 let avatarHeight = 50;
 let myAvatar;
+let orientation;
 
 
 function preload() {
@@ -38,40 +39,48 @@ function setup() {
 function draw() {
   background("green");
   handleInput();
+  stop();
   //drawAvatar();
   moveAvatar();
   drawSprites();
   myAvatar.position.x = avatarX;
   myAvatar.position.y = avatarY;
+  console.log(orientation);
 }
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW){
     myAvatar.addAnimation("default", animLEFT);
+    orientation = "LEFT";
   }
-  if (keyCode === RIGHT_ARROW){
+  else if (keyCode === RIGHT_ARROW){
     myAvatar.addAnimation("default", animRIGHT);
+    orientation = "RIGHT";
   }
-  if (keyCode === DOWN_ARROW){
+  else if (keyCode === DOWN_ARROW){
     myAvatar.addAnimation("default", animDOWN);
+    orientation = "DOWN";
   }
-  if (keyCode === UP_ARROW){
+  else if (keyCode === UP_ARROW){
     myAvatar.addAnimation("default", animUP);
+    orientation = "UP";
   }
 }
 
-function keyReleased() {
-  if (keyCode === LEFT_ARROW){
-    myAvatar.addAnimation("default", animSLEFT);
-  }
-  if (keyCode === RIGHT_ARROW){
-    myAvatar.addAnimation("default", animSRIGHT);
-  }
-  if (keyCode === DOWN_ARROW){
-    myAvatar.addAnimation("default", animSDOWN);
-  }
-  if (keyCode === UP_ARROW){
-    myAvatar.addAnimation("default", animSUP);
+function stop(){
+  if (avatarVX === 0 && avatarVY ===0){
+    if (orientation === "LEFT"){
+      myAvatar.addAnimation("default", animSLEFT);
+    }
+    else if (orientation === "RIGHT"){
+      myAvatar.addAnimation("default", animSRIGHT);
+    }
+    else if (orientation === "DOWN"){
+      myAvatar.addAnimation("default", animSDOWN);
+    }
+    else if (orientation === "UP"){
+      myAvatar.addAnimation("default", animSUP);
+    }
   }
 }
 
