@@ -9,9 +9,10 @@ let avatarHeight = 40;
 let myAvatar;
 let orientation;
 let pinkFlower;
-
+let grass;
 
 function preload() {
+  grass = loadImage("assets/images/grass.svg");
   pinkFlower = loadImage("assets/images/pinkF.png");
   animSUP = loadAnimation("assets/images/avatarI_0010.png");
   animSDOWN = loadAnimation("assets/images/avatarI_0001.png");
@@ -41,6 +42,7 @@ function setup() {
 function draw() {
   createCanvas(windowWidth,windowHeight);
   background("green");
+  image(grass, 200, 200, 70, 50);
   handleInput();
   stop();
   //drawAvatar();
