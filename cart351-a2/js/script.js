@@ -47,6 +47,7 @@ function draw() {
   myAvatar.position.x = avatarX;
   myAvatar.position.y = avatarY;
   console.log(orientation);
+  flower1.drawFlower();
 }
 
 function keyPressed() {
@@ -140,9 +141,10 @@ function moveAvatar(){
 
 
 // creating some flowers
-let flower1= new flowers(0,1,"marguerite");
+let flower1= new flowers(20,30,"marguerite");
 let flower2= new flowers(0,1,"tulipe");
 let flower3= new flowers(0,1,"tournesol");
+
 
 //Adding flowers to bouquet
 let bouquet=[];
@@ -167,4 +169,9 @@ function flowers(x, y, nom)
   this.addFlower=function(){
 
   }
+
+  this.drawFlower = function() {
+    ellipse(this.xPos, this.yPos, 20,20);
+  }
+
 }
