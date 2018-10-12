@@ -6,7 +6,14 @@ let avatarVY = 0;
 let avatarSpeed = 2;
 let avatarWidth = 40;
 let avatarHeight = 40;
+//sprites
 let myAvatar;
+let PFlowers;
+let VFlowers;
+let WFlowers;
+let YFlowers;
+let myGrass;
+//
 let orientation;
 let pinkFlower;
 let grass;
@@ -16,10 +23,16 @@ let doa = false;
 let lea = false;
 let ria = false;
 let index = 0;
+let numFlowers = 100;
 
 function preload() {
   grass = loadImage("assets/images/grass.svg");
   pinkFlower = loadImage("assets/images/pinkF.png");
+  spriteGrass = loadAnimation("assets/images/grass.svg");
+  spritePFlower = loadAnimation("assets/images/pinkF.png");
+  spriteVFlower = loadAnimation("assets/images/purpleF.png");
+  spriteWFlower = loadAnimation("assets/images/whiteF.png");
+  spriteYFlower = loadAnimation("assets/images/yellowF.png");
   animSUP = loadAnimation("assets/images/avatarI_0010.png");
   animSDOWN = loadAnimation("assets/images/avatarI_0001.png");
   animSLEFT = loadAnimation("assets/images/avatarI_0004.png");
@@ -38,11 +51,59 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   background("green");
   imageMode(CENTER);
+  PFlowers = new Group();
+  VFlowers = new Group();
+  WFlowers = new Group();
+  YFlowers = new Group();
   Avatar.setupAvatar();
-  myAvatar = createSprite(avatarX, avatarY, 40, 40);
+  myAvatar = createSprite(avatarX, avatarY, 20, 20);
+  myAvatar.scale = 2;
   myAvatar.addAnimation("default", animSDOWN);
   myAvatar.shapeColor = color(255);
   myAvatar.velocity.y = 0;
+  for (var i = 0; i < numFlowers; i++){
+    var x = random(0,width);
+    var y = random(0,height);
+    r = random(0,0.4)
+      if (r < 0.1){
+        //let aFlower = new flowers(x,y,30,60,"pink");
+        var newPFlower = createSprite(x,y,5,5);
+        newPFlower.addAnimation("default",spritePFlower);
+        newPFlower.scale = 0.01;
+        newPFlower.addToGroup(PFlowers);
+        console.log(newPFlower);
+      }
+      else if (r < 0.2){
+        //let aFlower = new flowers(x,y,30,60,"purple");
+        var newVFlower = createSprite(x,y,5,5);
+        newVFlower.addAnimation("default",spriteVFlower);
+        newVFlower.scale = 0.04;
+        newVFlower.addToGroup(VFlowers);
+      }
+      else if (r < 0.3){
+        //let aFlower = new flowers(x,y,30,60,"white");
+        var newWFlower = createSprite(x,y,5,5);
+        newWFlower.addAnimation("default",spriteWFlower);
+        newWFlower.scale = 0.04;
+        newWFlower.addToGroup(WFlowers);
+      }
+      else if (r < 0.4){
+        //let aFlower = new flowers(x,y,30,60,"yellow");
+        var newYFlower = createSprite(x,y,5,5);
+        newYFlower.addAnimation("default",spriteYFlower);
+        newYFlower.scale = 0.04;
+        newYFlower.addToGroup(YFlowers);
+      }
+
+  }
+  for (var i = 0; i < 100; i++){
+    var x = random(0,width);
+    var y = random(0,height);
+
+    myGrass = createSprite(x,y,30,60);
+    myGrass.addAnimation("default",spriteGrass);
+    myGrass.scale = 0.20;
+  }
 }
 
 function draw() {
@@ -61,6 +122,22 @@ function draw() {
   flower1.drawFlower();
   bflower1.drawbFlower();
   bflower2.drawbFlower();
+  //aFlower.drawFlower();
+
+  //set the existing sprites' depths in relation to their position
+  for(var i=0; i<allSprites.length; i++) {
+    //sprites on the bottom will be drawn first
+    allSprites[i].depth = allSprites[i].position.y;
+
+    //you can link the scale to the y position to simulate perspective
+    //allSprites[i].scale = map(allSprites[i].position.y, 0, height, 0.2, 1);
+  }
+  // for(var j = 0; j<myPFlower.length;j++){
+  //   var f = myPFlower[j];
+  //   if(myAvatar.overlap(myPFlower)){
+  //     console.log("overlap");
+  //   }
+  // }
 }
 
 function windowResized() {
@@ -68,6 +145,46 @@ function windowResized() {
 }
 
 function keyPressed() {
+
+  // Remove function test
+  for(var j = 0; j<PFlowers.length;j++){
+    var f = PFlowers[j];
+    if(keyCode === ENTER){
+      if(myAvatar.overlap(PFlowers[j])){
+        PFlowers[j].remove();
+        console.log("overlap");
+      }
+    }
+  }
+  for(var j = 0; j<VFlowers.length;j++){
+    var f = VFlowers[j];
+    if(keyCode === ENTER){
+      if(myAvatar.overlap(VFlowers[j])){
+        VFlowers[j].remove();
+        console.log("overlap");
+      }
+    }
+  }
+  for(var j = 0; j<WFlowers.length;j++){
+    var f = WFlowers[j];
+    if(keyCode === ENTER){
+      if(myAvatar.overlap(WFlowers[j])){
+        WFlowers[j].remove();
+        console.log("overlap");
+      }
+    }
+  }
+  for(var j = 0; j<YFlowers.length;j++){
+    var f = YFlowers[j];
+    if(keyCode === ENTER){
+      if(myAvatar.overlap(YFlowers[j])){
+        YFlowers[j].remove();
+        console.log("overlap");
+      }
+    }
+  }
+
+
   if (keyCode === LEFT_ARROW){
     lea=true;
   }
@@ -121,8 +238,10 @@ function keyReleased() {
   }
 }
 
-let Avatar = new avatar(0,0,40,40,0,0,2,"");
+let Avatar = new avatar(0,0,80,80,0,0,2,"");
 
+
+// Avatar class
 function avatar(x, y, w, h, vx, vy, s, o){
   avatarX=x;
   avatarY=y;
@@ -207,7 +326,16 @@ function avatar(x, y, w, h, vx, vy, s, o){
       }
     }
   }
-}
+
+  this.pickFlower = function(){
+    var d = dist(avatarX,avatarY,aFlower.xPos,aFlower.yPos);
+    if (d < avatarWidth + aFlower.width){
+
+    }
+  }
+} // end of Avatar class
+
+
 
 // creating some flowers
 let flower1= new flowers(20,30,30,60,"marguerite");
@@ -215,7 +343,9 @@ let flower2= new flowers(50,100,30,60,"tulipe");
 let flower3= new flowers(200,150,30,60,"tournesol");
 
 let bflower1= new bflowers(15,5,20,50,"allo");
-let bflower2= new bflowers(20,10,20,50,"allo")
+let bflower2= new bflowers(20,10,20,50,"allo");
+
+
 
 //Adding flowers to bouquet
 let bouquet=[];
