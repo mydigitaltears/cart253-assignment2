@@ -10,6 +10,11 @@ let myAvatar;
 let orientation;
 let pinkFlower;
 let grass;
+let oo;
+let upa = false;
+let doa = false;
+let lea = false;
+let ria = false;
 
 function preload() {
   grass = loadImage("assets/images/grass.svg");
@@ -50,7 +55,9 @@ function draw() {
   drawSprites();
   myAvatar.position.x = avatarX;
   myAvatar.position.y = avatarY;
-  console.log(orientation);
+  console.log(oo);
+  console.log(avatarVX);
+  console.log(avatarVY);
   flower1.drawFlower();
   bflower1.drawbFlower();
   bflower2.drawbFlower();
@@ -58,31 +65,70 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW){
+    lea=true;
+  }
+  if (keyCode === RIGHT_ARROW){
+    ria=true;
+  }
+  if (keyCode === DOWN_ARROW){
+    doa=true;
+  }
+  if (keyCode === UP_ARROW){
+    upa=true;
+  }
+  if (lea === true){
     myAvatar.addAnimation("default", animLEFT);
   }
-  else if (keyCode === RIGHT_ARROW){
+  if (ria === true){
     myAvatar.addAnimation("default", animRIGHT);
   }
-  else if (keyCode === DOWN_ARROW){
+  if (doa === true){
     myAvatar.addAnimation("default", animDOWN);
   }
-  else if (keyCode === UP_ARROW){
+  if (upa === true){
+    myAvatar.addAnimation("default", animUP);
+  }
+}
+
+function keyReleased() {
+  if (keyCode === LEFT_ARROW){
+    lea=false;
+  }
+  if (keyCode === RIGHT_ARROW){
+    ria=false;
+  }
+  if (keyCode === DOWN_ARROW){
+    doa=false;
+  }
+  if (keyCode === UP_ARROW){
+    upa=false;
+  }
+  if (lea === true){
+    myAvatar.addAnimation("default", animLEFT);
+  }
+  if (ria === true){
+    myAvatar.addAnimation("default", animRIGHT);
+  }
+  if (doa === true){
+    myAvatar.addAnimation("default", animDOWN);
+  }
+  if (upa === true){
     myAvatar.addAnimation("default", animUP);
   }
 }
 
 function stop(){
   if (avatarVX === 0 && avatarVY ===0){
-    if (orientation === "LEFT"){
+    if (orientation === animLEFT){
       myAvatar.addAnimation("default", animSLEFT);
     }
-    else if (orientation === "RIGHT"){
+    else if (orientation === animRIGHT){
       myAvatar.addAnimation("default", animSRIGHT);
     }
-    else if (orientation === "DOWN"){
+    else if (orientation === animDOWN){
       myAvatar.addAnimation("default", animSDOWN);
     }
-    else if (orientation === "UP"){
+    else if (orientation === animUP){
       myAvatar.addAnimation("default", animSUP);
     }
   }
@@ -94,11 +140,13 @@ function handleInput() {
   // Check for horizontal movement
   if (keyIsDown(LEFT_ARROW)) {
     avatarVX = -avatarSpeed;
-    orientation = "LEFT";
+    orientation = animLEFT;
+    oo = "LEFT";
   }
   else if (keyIsDown(RIGHT_ARROW)) {
     avatarVX = avatarSpeed;
-    orientation = "RIGHT";
+    orientation = animRIGHT;
+    oo = "RIGHT";
   }
   else {
     avatarVX = 0;
@@ -107,11 +155,13 @@ function handleInput() {
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
     avatarVY = -avatarSpeed;
-    orientation = "UP";
+    orientation = animUP;
+    oo = "UP";
   }
   else if (keyIsDown(DOWN_ARROW)) {
     avatarVY = avatarSpeed;
-    orientation = "DOWN";
+    orientation = animDOWN;
+    oo = "DOWN";
   }
   else {
     avatarVY = 0;
