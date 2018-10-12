@@ -6,22 +6,25 @@ let avatarVY = 0;
 let avatarSpeed = 2;
 let avatarWidth = 40;
 let avatarHeight = 40;
+let orientation;
+let oo;
+let upa = false;
+let doa = false;
+let lea = false;
+let ria = false;
 //sprites
 let myAvatar;
 let PFlowers;
 let VFlowers;
 let WFlowers;
 let YFlowers;
+let BFlowers;
 let myGrass;
 //
-let orientation;
+// misc variables
+let nb = 0;
 let pinkFlower;
 let grass;
-let oo;
-let upa = false;
-let doa = false;
-let lea = false;
-let ria = false;
 let index = 0;
 let numFlowers = 100;
 
@@ -55,12 +58,15 @@ function setup() {
   VFlowers = new Group();
   WFlowers = new Group();
   YFlowers = new Group();
+  BFlowers = new Group();
   Avatar.setupAvatar();
-  myAvatar = createSprite(avatarX, avatarY, 20, 20);
-  myAvatar.scale = 2;
+  myAvatar = createSprite(avatarX, avatarY, 5, 5);
+  myAvatar.scale = 1.5;
   myAvatar.addAnimation("default", animSDOWN);
   myAvatar.shapeColor = color(255);
   myAvatar.velocity.y = 0;
+
+  // generating the flowers
   for (var i = 0; i < numFlowers; i++){
     var x = random(0,width);
     var y = random(0,height);
@@ -96,6 +102,8 @@ function setup() {
       }
 
   }
+
+  // generating the grass
   for (var i = 0; i < 100; i++){
     var x = random(0,width);
     var y = random(0,height);
@@ -119,9 +127,9 @@ function draw() {
   console.log(oo);
   //console.log(avatarX);
   //console.log(avatarY);
-  flower1.drawFlower();
-  bflower1.drawbFlower();
-  bflower2.drawbFlower();
+  //flower1.drawFlower();
+  //bflower1.drawbFlower();
+  //bflower2.drawbFlower();
   //aFlower.drawFlower();
 
   //set the existing sprites' depths in relation to their position
@@ -132,12 +140,10 @@ function draw() {
     //you can link the scale to the y position to simulate perspective
     //allSprites[i].scale = map(allSprites[i].position.y, 0, height, 0.2, 1);
   }
-  // for(var j = 0; j<myPFlower.length;j++){
-  //   var f = myPFlower[j];
-  //   if(myAvatar.overlap(myPFlower)){
-  //     console.log("overlap");
-  //   }
-  // }
+  for(var i=0; i<BFlowers.length; i++) {
+    BFlowers[i].position.x = avatarX+30+(i*10);
+    BFlowers[i].position.y = avatarY;
+  }
 }
 
 function windowResized() {
@@ -153,6 +159,11 @@ function keyPressed() {
       if(myAvatar.overlap(PFlowers[j])){
         PFlowers[j].remove();
         console.log("overlap");
+        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower.addAnimation("default",spritePFlower);
+        newBFlower.scale = 0.005;
+        newBFlower.scale = 0.005;
+        newBFlower.addToGroup(BFlowers);
       }
     }
   }
@@ -162,6 +173,11 @@ function keyPressed() {
       if(myAvatar.overlap(VFlowers[j])){
         VFlowers[j].remove();
         console.log("overlap");
+        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower.addAnimation("default",spriteVFlower);
+        newBFlower.scale = 0.02;
+        newBFlower.scale = 0.02;
+        newBFlower.addToGroup(BFlowers);
       }
     }
   }
@@ -171,6 +187,11 @@ function keyPressed() {
       if(myAvatar.overlap(WFlowers[j])){
         WFlowers[j].remove();
         console.log("overlap");
+        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower.addAnimation("default",spriteWFlower);
+        newBFlower.scale = 0.02;
+        newBFlower.scale = 0.02;
+        newBFlower.addToGroup(BFlowers);
       }
     }
   }
@@ -180,11 +201,16 @@ function keyPressed() {
       if(myAvatar.overlap(YFlowers[j])){
         YFlowers[j].remove();
         console.log("overlap");
+        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower.addAnimation("default",spriteYFlower);
+        newBFlower.scale = 0.02;
+        newBFlower.scale = 0.02;
+        newBFlower.addToGroup(BFlowers);
       }
     }
   }
 
-
+  // orientation for animation
   if (keyCode === LEFT_ARROW){
     lea=true;
   }
@@ -236,7 +262,7 @@ function keyReleased() {
   if (upa === true){
     myAvatar.addAnimation("default", animUP);
   }
-}
+} // end of setup
 
 let Avatar = new avatar(0,0,80,80,0,0,2,"");
 
