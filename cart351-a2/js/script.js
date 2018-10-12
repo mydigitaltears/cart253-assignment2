@@ -26,7 +26,7 @@ let nb = 0;
 let pinkFlower;
 let grass;
 let index = 0;
-let numFlowers = 100;
+let numFlowers = 500;
 
 function preload() {
   grass = loadImage("assets/images/grass.svg");
@@ -141,8 +141,39 @@ function draw() {
     //allSprites[i].scale = map(allSprites[i].position.y, 0, height, 0.2, 1);
   }
   for(var i=0; i<BFlowers.length; i++) {
-    BFlowers[i].position.x = avatarX+30+(i*10);
-    BFlowers[i].position.y = avatarY;
+    if (i%1 === 0){
+      BFlowers[i].position.x = avatarX+20+(5+i);
+      BFlowers[i].position.y = avatarY+(5+i);
+    }
+    else if (i%2 === 0){
+      BFlowers[i].position.x = avatarX+20+(5+i);
+      BFlowers[i].position.y = avatarY+0+i;
+    }
+    else if (i%3 === 0){
+      BFlowers[i].position.x = avatarX+20+(5+i);
+      BFlowers[i].position.y = avatarY-5-i;
+    }
+    else if (i%4 === 0){
+      BFlowers[i].position.x = avatarX+20+i;
+      BFlowers[i].position.y = avatarY-5-i;
+    }
+    else if (i%5 === 0){
+      BFlowers[i].position.x = avatarX+20+0+i;
+      BFlowers[i].position.y = avatarY-5-i;
+    }
+    else if (i%6 === 0){
+      BFlowers[i].position.x = avatarX+20-5-i;
+      BFlowers[i].position.y = avatarY-i;
+    }
+    else if (i%7 === 0){
+      BFlowers[i].position.x = avatarX+20-5-i;
+      BFlowers[i].position.y = avatarY+5+i;
+    }
+    else if (i%8 === 0){
+      BFlowers[i].position.x = avatarX+20+0+i;
+      BFlowers[i].position.y = avatarY+5+i;
+    }
+
   }
 }
 
