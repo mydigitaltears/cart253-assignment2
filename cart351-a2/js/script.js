@@ -15,6 +15,7 @@ let upa = false;
 let doa = false;
 let lea = false;
 let ria = false;
+let index = 0;
 
 function preload() {
   grass = loadImage("assets/images/grass.svg");
@@ -37,7 +38,7 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   background("green");
   imageMode(CENTER);
-  setupAvatar();
+  Avatar.setupAvatar();
   myAvatar = createSprite(avatarX, avatarY, 40, 40);
   myAvatar.addAnimation("default", animSDOWN);
   myAvatar.shapeColor = color(255);
@@ -45,22 +46,25 @@ function setup() {
 }
 
 function draw() {
-  createCanvas(windowWidth,windowHeight);
   background("green");
   image(grass, 200, 200, 70, 50);
-  handleInput();
-  stop();
-  //drawAvatar();
-  moveAvatar();
+  Avatar.handleInput();
+  Avatar.drawAvatar();
+  Avatar.moveAvatar();
+  Avatar.stop();
   drawSprites();
   myAvatar.position.x = avatarX;
   myAvatar.position.y = avatarY;
   console.log(oo);
-  console.log(avatarVX);
-  console.log(avatarVY);
+  //console.log(avatarX);
+  //console.log(avatarY);
   flower1.drawFlower();
   bflower1.drawbFlower();
   bflower2.drawbFlower();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 function keyPressed() {
@@ -117,84 +121,93 @@ function keyReleased() {
   }
 }
 
-function stop(){
-  if (avatarVX === 0 && avatarVY ===0){
-    if (orientation === animLEFT){
-      myAvatar.addAnimation("default", animSLEFT);
+let Avatar = new avatar(0,0,40,40,0,0,2,"");
+
+function avatar(x, y, w, h, vx, vy, s, o){
+  avatarX=x;
+  avatarY=y;
+  avatarWidth=w;
+  avatarHeight=h;
+  avatarVX=vx;
+  avatarVY=vy;
+  avatarSpeed=s;
+  orientation=o;
+
+  this.setupAvatar = function(){
+    avatarX = width/2;
+    avatarY = height/2;
+  }
+
+  this.drawAvatar = function(){
+    ellipse(avatarX,avatarY,avatarWidth,avatarHeight);
+  }
+
+  this.moveAvatar = function(){
+    avatarX += avatarVX;
+    avatarY += avatarVY;
+    if (avatarX < 0){
+      avatarX= 0;
     }
-    else if (orientation === animRIGHT){
-      myAvatar.addAnimation("default", animSRIGHT);
+    if (avatarX > width){
+      avatarX = width;
     }
-    else if (orientation === animDOWN){
-      myAvatar.addAnimation("default", animSDOWN);
+    if (avatarY < 0){
+      avatarY = 0;
     }
-    else if (orientation === animUP){
-      myAvatar.addAnimation("default", animSUP);
+    if (avatarY > height){
+      avatarY = height;
+    }
+  }
+
+  this.handleInput = function() {
+    // Check for horizontal movement
+    if (keyIsDown(LEFT_ARROW)) {
+      avatarVX = -avatarSpeed;
+      orientation = animLEFT;
+      oo = "LEFT";
+    }
+    else if (keyIsDown(RIGHT_ARROW)) {
+      avatarVX = avatarSpeed;
+      orientation = animRIGHT;
+      oo = "RIGHT";
+    }
+    else {
+      avatarVX = 0;
+    }
+
+    // Check for vertical movement
+    if (keyIsDown(UP_ARROW)) {
+      avatarVY = -avatarSpeed;
+      orientation = animUP;
+      oo = "UP";
+    }
+    else if (keyIsDown(DOWN_ARROW)) {
+      avatarVY = avatarSpeed;
+      orientation = animDOWN;
+      oo = "DOWN";
+    }
+    else {
+      avatarVY = 0;
+    }
+  }
+
+  this.stop = function(){
+    if (avatarVX === 0 && avatarVY ===0){
+      if (orientation === animLEFT){
+        myAvatar.addAnimation("default", animSLEFT);
+      }
+      else if (orientation === animRIGHT){
+        myAvatar.addAnimation("default", animSRIGHT);
+      }
+      else if (orientation === animDOWN){
+        myAvatar.addAnimation("default", animSDOWN);
+      }
+      else if (orientation === animUP){
+        myAvatar.addAnimation("default", animSUP);
+      }
     }
   }
 }
-
-
-//inputs
-function handleInput() {
-  // Check for horizontal movement
-  if (keyIsDown(LEFT_ARROW)) {
-    avatarVX = -avatarSpeed;
-    orientation = animLEFT;
-    oo = "LEFT";
-  }
-  else if (keyIsDown(RIGHT_ARROW)) {
-    avatarVX = avatarSpeed;
-    orientation = animRIGHT;
-    oo = "RIGHT";
-  }
-  else {
-    avatarVX = 0;
-  }
-
-  // Check for vertical movement
-  if (keyIsDown(UP_ARROW)) {
-    avatarVY = -avatarSpeed;
-    orientation = animUP;
-    oo = "UP";
-  }
-  else if (keyIsDown(DOWN_ARROW)) {
-    avatarVY = avatarSpeed;
-    orientation = animDOWN;
-    oo = "DOWN";
-  }
-  else {
-    avatarVY = 0;
-  }
-}
-
-// setup / draw / move for avatar
-function setupAvatar(){
-  avatarX = width/2;
-  avatarY = height/2;
-}
-
-function drawAvatar(){
-  ellipse(avatarX,avatarY,avatarWidth,avatarHeight);
-}
-
-function moveAvatar(){
-  avatarX += avatarVX;
-  avatarY += avatarVY;
-  if (avatarX < 0){
-    avatarX = 0;
-  }
-  if (avatarX > width){
-    avatarX = width;
-  }
-  if (avatarY < 0){
-    avatarY = 0;
-  }
-  if (avatarY > height){
-    avatarY = height;
-  }
-}
-
 
 // creating some flowers
 let flower1= new flowers(20,30,30,60,"marguerite");
