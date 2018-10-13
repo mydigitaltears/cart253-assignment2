@@ -19,6 +19,8 @@ let VFlowers;
 let WFlowers;
 let YFlowers;
 let BFlowers;
+let TYFlowers;
+let TRFlowers;
 let myGrass;
 let myTree;
 //
@@ -34,7 +36,9 @@ function preload() {
   //grass = loadImage("assets/images/grass.svg");
   //pinkFlower = loadImage("assets/images/pinkF.png");
   spriteTree = loadAnimation("assets/images/tree.png");
-  spriteGrass = loadAnimation("assets/images/grass.svg");
+  spriteGrass = loadAnimation("assets/images/grass2.png");
+  spriteTYFlower = loadAnimation("assets/images/tulippeJ.png");
+  spriteTRFlower = loadAnimation("assets/images/tulippeR.png");
   spritePFlower = loadAnimation("assets/images/pinkF.png");
   spriteVFlower = loadAnimation("assets/images/purpleF.png");
   spriteWFlower = loadAnimation("assets/images/whiteF.png");
@@ -63,10 +67,11 @@ function setup() {
   WFlowers = new Group();
   YFlowers = new Group();
   BFlowers = new Group();
+  TYFlowers = new Group();
+  TRFlowers = new Group();
   myTree = new Group();
   Avatar.setupAvatar();
   myAvatar = createSprite(avatarX, avatarY, 5, 5);
-  myAvatar.scale = 1.5;
   myAvatar.addAnimation("default", animSDOWN);
   myAvatar.shapeColor = color(255);
   myAvatar.velocity.y = 0;
@@ -75,12 +80,11 @@ function setup() {
   for (var i = 0; i < numFlowers; i++){
     var x = random(0,width);
     var y = random(0,height);
-    r = random(0,0.4)
+    r = random(0,0.6)
       if (r < 0.1){
         //let aFlower = new flowers(x,y,30,60,"pink");
         var newPFlower = createSprite(x,y,5,5);
         newPFlower.addAnimation("default",spritePFlower);
-        newPFlower.scale = 0.01;
         newPFlower.addToGroup(PFlowers);
         console.log(newPFlower);
       }
@@ -88,34 +92,44 @@ function setup() {
         //let aFlower = new flowers(x,y,30,60,"purple");
         var newVFlower = createSprite(x,y,5,5);
         newVFlower.addAnimation("default",spriteVFlower);
-        newVFlower.scale = 0.04;
         newVFlower.addToGroup(VFlowers);
       }
       else if (r < 0.3){
         //let aFlower = new flowers(x,y,30,60,"white");
         var newWFlower = createSprite(x,y,5,5);
         newWFlower.addAnimation("default",spriteWFlower);
-        newWFlower.scale = 0.04;
         newWFlower.addToGroup(WFlowers);
       }
       else if (r < 0.4){
         //let aFlower = new flowers(x,y,30,60,"yellow");
         var newYFlower = createSprite(x,y,5,5);
         newYFlower.addAnimation("default",spriteYFlower);
-        newYFlower.scale = 0.04;
         newYFlower.addToGroup(YFlowers);
+      }
+
+      else if (r < 0.5){
+        //let aFlower = new flowers(x,y,30,60,"yellow");
+        var newTYFlower = createSprite(x,y,5,5);
+        newTYFlower.addAnimation("default",spriteTYFlower);
+        newTYFlower.addToGroup(TYFlowers);
+      }
+
+      else if (r < 0.6){
+        //let aFlower = new flowers(x,y,30,60,"yellow");
+        var newTRFlower = createSprite(x,y,5,5);
+        newTRFlower.addAnimation("default",spriteTRFlower);
+        newTRFlower.addToGroup(TRFlowers);
       }
 
   }
 
   // generating the grass
-  for (var i = 0; i < 50; i++){
+  for (var i = 0; i < 300; i++){
     var x = random(0,width);
     var y = random(0,height);
 
     myGrass = createSprite(x,y,30,60);
     myGrass.addAnimation("default",spriteGrass);
-    myGrass.scale = 0.20;
   }
 
   // generating the trees
@@ -125,7 +139,6 @@ function setup() {
 
     var newTree = createSprite(x,y,30,60);
     newTree.addAnimation("default",spriteTree);
-    newTree.scale = 0.07;
     newTree.addToGroup(myTree);
   }
 }
@@ -154,7 +167,7 @@ function draw() {
     var pos = allSprites[i].position.y;
     var hei = allSprites[i].height/2;
     // console.log(hei);
-    allSprites[i].depth = pos;
+    allSprites[i].depth = pos+hei;
     //you can link the scale to the y position to simulate perspective
     //allSprites[i].scale = map(allSprites[i].position.y, 0, height, 0.2, 1);
   }
@@ -194,12 +207,11 @@ function keyPressed() {
         //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spritePFlower);
-        newBFlower.scale = 0.005;
-        newBFlower.scale = 0.005;
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
+
   for(var j = 0; j<VFlowers.length;j++){
     var f = VFlowers[j];
     if(keyCode === ENTER){
@@ -208,12 +220,11 @@ function keyPressed() {
         //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spriteVFlower);
-        newBFlower.scale = 0.02;
-        newBFlower.scale = 0.02;
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
+
   for(var j = 0; j<WFlowers.length;j++){
     var f = WFlowers[j];
     if(keyCode === ENTER){
@@ -222,12 +233,11 @@ function keyPressed() {
         //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spriteWFlower);
-        newBFlower.scale = 0.02;
-        newBFlower.scale = 0.02;
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
+
   for(var j = 0; j<YFlowers.length;j++){
     var f = YFlowers[j];
     if(keyCode === ENTER){
@@ -236,12 +246,37 @@ function keyPressed() {
         //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spriteYFlower);
-        newBFlower.scale = 0.02;
-        newBFlower.scale = 0.02;
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
+
+  for(var j = 0; j<TYFlowers.length;j++){
+      var f = TYFlowers[j];
+      if(keyCode === ENTER){
+        if(myAvatar.overlap(TYFlowers[j])){
+          TYFlowers[j].remove();
+          //console.log("overlap");
+          newBFlower = createSprite(avatarX,avatarY,5,5);
+          newBFlower.addAnimation("default",spriteTYFlower);
+          newBFlower.addToGroup(BFlowers);
+        }
+      }
+    }
+
+    for(var j = 0; j<TRFlowers.length;j++){
+        var f = TRFlowers[j];
+        if(keyCode === ENTER){
+          if(myAvatar.overlap(TRFlowers[j])){
+            TRFlowers[j].remove();
+            //console.log("overlap");
+            newBFlower = createSprite(avatarX,avatarY,5,5);
+            newBFlower.addAnimation("default",spriteTRFlower);
+            newBFlower.addToGroup(BFlowers);
+          }
+        }
+      }
+
 
   // orientation for animation
   if (keyCode === LEFT_ARROW){
