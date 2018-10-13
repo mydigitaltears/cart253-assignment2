@@ -20,17 +20,20 @@ let WFlowers;
 let YFlowers;
 let BFlowers;
 let myGrass;
+let myTree;
 //
 // misc variables
 let nb = 0;
 let pinkFlower;
 let grass;
 let index = 0;
-let numFlowers = 500;
+let rectX = 0;
+let numFlowers = 100;
 
 function preload() {
-  grass = loadImage("assets/images/grass.svg");
-  pinkFlower = loadImage("assets/images/pinkF.png");
+  //grass = loadImage("assets/images/grass.svg");
+  //pinkFlower = loadImage("assets/images/pinkF.png");
+  spriteTree = loadAnimation("assets/images/tree.png");
   spriteGrass = loadAnimation("assets/images/grass.svg");
   spritePFlower = loadAnimation("assets/images/pinkF.png");
   spriteVFlower = loadAnimation("assets/images/purpleF.png");
@@ -54,11 +57,13 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   background("green");
   imageMode(CENTER);
+  frameRate(30);
   PFlowers = new Group();
   VFlowers = new Group();
   WFlowers = new Group();
   YFlowers = new Group();
   BFlowers = new Group();
+  myTree = new Group();
   Avatar.setupAvatar();
   myAvatar = createSprite(avatarX, avatarY, 5, 5);
   myAvatar.scale = 1.5;
@@ -104,7 +109,7 @@ function setup() {
   }
 
   // generating the grass
-  for (var i = 0; i < 100; i++){
+  for (var i = 0; i < 50; i++){
     var x = random(0,width);
     var y = random(0,height);
 
@@ -112,73 +117,70 @@ function setup() {
     myGrass.addAnimation("default",spriteGrass);
     myGrass.scale = 0.20;
   }
+
+  // generating the trees
+  for (var i = 0; i < 10; i++){
+    var x = random(0,width);
+    var y = random(0,height);
+
+    var newTree = createSprite(x,y,30,60);
+    newTree.addAnimation("default",spriteTree);
+    newTree.scale = 0.07;
+    newTree.addToGroup(myTree);
+  }
 }
 
 function draw() {
   background("green");
-  image(grass, 200, 200, 70, 50);
+  //image(grass, 200, 200, 70, 50);
   Avatar.handleInput();
-  Avatar.drawAvatar();
+  //Avatar.drawAvatar();
   Avatar.moveAvatar();
   Avatar.stop();
   drawSprites();
   myAvatar.position.x = avatarX;
   myAvatar.position.y = avatarY;
-  console.log(oo);
+  //console.log(oo);
   //console.log(avatarX);
   //console.log(avatarY);
   //flower1.drawFlower();
   //bflower1.drawbFlower();
   //bflower2.drawbFlower();
   //aFlower.drawFlower();
-
+  wind();
   //set the existing sprites' depths in relation to their position
   for(var i=0; i<allSprites.length; i++) {
     //sprites on the bottom will be drawn first
-    allSprites[i].depth = allSprites[i].position.y;
-
+    var pos = allSprites[i].position.y;
+    var hei = allSprites[i].height/2;
+    // console.log(hei);
+    allSprites[i].depth = pos;
     //you can link the scale to the y position to simulate perspective
     //allSprites[i].scale = map(allSprites[i].position.y, 0, height, 0.2, 1);
   }
-  for(var i=0; i<BFlowers.length; i++) {
-    if (i%1 === 0){
-      BFlowers[i].position.x = avatarX+20+(5+i);
-      BFlowers[i].position.y = avatarY+(5+i);
-    }
-    else if (i%2 === 0){
-      BFlowers[i].position.x = avatarX+20+(5+i);
-      BFlowers[i].position.y = avatarY+0+i;
-    }
-    else if (i%3 === 0){
-      BFlowers[i].position.x = avatarX+20+(5+i);
-      BFlowers[i].position.y = avatarY-5-i;
-    }
-    else if (i%4 === 0){
-      BFlowers[i].position.x = avatarX+20+i;
-      BFlowers[i].position.y = avatarY-5-i;
-    }
-    else if (i%5 === 0){
-      BFlowers[i].position.x = avatarX+20+0+i;
-      BFlowers[i].position.y = avatarY-5-i;
-    }
-    else if (i%6 === 0){
-      BFlowers[i].position.x = avatarX+20-5-i;
-      BFlowers[i].position.y = avatarY-i;
-    }
-    else if (i%7 === 0){
-      BFlowers[i].position.x = avatarX+20-5-i;
-      BFlowers[i].position.y = avatarY+5+i;
-    }
-    else if (i%8 === 0){
-      BFlowers[i].position.x = avatarX+20+0+i;
-      BFlowers[i].position.y = avatarY+5+i;
-    }
 
+  for(var i=0; i<BFlowers.length; i++) {
+      let l = 0;
+      l = Math.sin(i);
+      let p = 0;
+      p = Math.cos(i);
+      BFlowers[i].position.x = avatarX+20+(i/2*l);
+      BFlowers[i].position.y = avatarY+(i/2*p);
+      //console.log(l);
   }
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function wind() {
+  rectX += 2;
+  noStroke();
+  rect(rectX,100+sin(rectX*50)*3,100,5);
+  if (rectX > width){
+    rectX = -100;
+  }
 }
 
 function keyPressed() {
@@ -189,7 +191,7 @@ function keyPressed() {
     if(keyCode === ENTER){
       if(myAvatar.overlap(PFlowers[j])){
         PFlowers[j].remove();
-        console.log("overlap");
+        //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spritePFlower);
         newBFlower.scale = 0.005;
@@ -203,7 +205,7 @@ function keyPressed() {
     if(keyCode === ENTER){
       if(myAvatar.overlap(VFlowers[j])){
         VFlowers[j].remove();
-        console.log("overlap");
+        //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spriteVFlower);
         newBFlower.scale = 0.02;
@@ -217,7 +219,7 @@ function keyPressed() {
     if(keyCode === ENTER){
       if(myAvatar.overlap(WFlowers[j])){
         WFlowers[j].remove();
-        console.log("overlap");
+        //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spriteWFlower);
         newBFlower.scale = 0.02;
@@ -231,7 +233,7 @@ function keyPressed() {
     if(keyCode === ENTER){
       if(myAvatar.overlap(YFlowers[j])){
         YFlowers[j].remove();
-        console.log("overlap");
+        //console.log("overlap");
         newBFlower = createSprite(avatarX,avatarY,5,5);
         newBFlower.addAnimation("default",spriteYFlower);
         newBFlower.scale = 0.02;
@@ -295,7 +297,7 @@ function keyReleased() {
   }
 } // end of setup
 
-let Avatar = new avatar(0,0,80,80,0,0,2,"");
+let Avatar = new avatar(0,0,80,80,0,0,4,"");
 
 
 // Avatar class
@@ -395,58 +397,58 @@ function avatar(x, y, w, h, vx, vy, s, o){
 
 
 // creating some flowers
-let flower1= new flowers(20,30,30,60,"marguerite");
-let flower2= new flowers(50,100,30,60,"tulipe");
-let flower3= new flowers(200,150,30,60,"tournesol");
-
-let bflower1= new bflowers(15,5,20,50,"allo");
-let bflower2= new bflowers(20,10,20,50,"allo");
-
-
-
-//Adding flowers to bouquet
-let bouquet=[];
-
-//PERSONNAGE PASSE SUR LA FLEUR- EVENT
-if(event)
-{
-  bouquet.push();
-}
-
-function bflowers(x, y ,w, h, nom){
-  this.xPos=x;
-  this.yPos=y;
-  this.width=w;
-  this.height=h;
-  this.name=nom;
-
-  this.drawbFlower = function() {
-    //rect(this.xPos+avatarX,this.yPos+avatarY,this.width,this.height);
-    image(pinkFlower, this.xPos+avatarX, this.yPos+avatarY, this.width, this.height);
-  }
-}
-
-// flowers Constructor
-
-function flowers(x, y, w, h, nom)
-{
-  this.xPos=x;
-  this.yPos=y;
-  this.width=w;
-  this.height=h;
-  this.name=nom;
-
-  this.removeFlower=function(){
-    let d = dist(avatarX, avatarY, this.width,this.height);
-
-  }
-
-  this.addFlower=function(){
-
-  }
-
-  this.drawFlower = function() {
-    image(pinkFlower, this.xPos, this.yPos, this.width, this.height);
-  }
-
-}
+// let flower1= new flowers(20,30,30,60,"marguerite");
+// let flower2= new flowers(50,100,30,60,"tulipe");
+// let flower3= new flowers(200,150,30,60,"tournesol");
+//
+// let bflower1= new bflowers(15,5,20,50,"allo");
+// let bflower2= new bflowers(20,10,20,50,"allo");
+//
+//
+//
+// //Adding flowers to bouquet
+// let bouquet=[];
+//
+// //PERSONNAGE PASSE SUR LA FLEUR- EVENT
+// if(event)
+// {
+//   bouquet.push();
+// }
+//
+// function bflowers(x, y ,w, h, nom){
+//   this.xPos=x;
+//   this.yPos=y;
+//   this.width=w;
+//   this.height=h;
+//   this.name=nom;
+//
+//   this.drawbFlower = function() {
+//     //rect(this.xPos+avatarX,this.yPos+avatarY,this.width,this.height);
+//     image(pinkFlower, this.xPos+avatarX, this.yPos+avatarY, this.width, this.height);
+//   }
+// }
+//
+// // flowers Constructor
+//
+// function flowers(x, y, w, h, nom)
+// {
+//   this.xPos=x;
+//   this.yPos=y;
+//   this.width=w;
+//   this.height=h;
+//   this.name=nom;
+//
+//   this.removeFlower=function(){
+//     let d = dist(avatarX, avatarY, this.width,this.height);
+//
+//   }
+//
+//   this.addFlower=function(){
+//
+//   }
+//
+//   this.drawFlower = function() {
+//     image(pinkFlower, this.xPos, this.yPos, this.width, this.height);
+//   }
+//
+// }
