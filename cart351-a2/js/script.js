@@ -71,7 +71,7 @@ function setup() {
   Avatar.setupAvatar();
   myAvatar = createSprite(avatarX, avatarY, 5, 5);
   myAvatar.addAnimation("default", animSDOWN);
-  myAvatar.setCollider("rectangle",0,(myAvatar.height/2),myAvatar.width/2,15);
+  myAvatar.setCollider("rectangle",0,(myAvatar.height/2),myAvatar.width/2,20);
   myAvatar.shapeColor = color(255);
   myAvatar.velocity.y = 0;
 
@@ -84,25 +84,28 @@ function setup() {
         //let aFlower = new flowers(x,y,30,60,"pink");
         var newPFlower = createSprite(x,y,5,5);
         newPFlower.addAnimation("default",spritePFlower);
+        newPFlower.setCollider("rectangle",0,(newPFlower.height/2),newPFlower.width/2,20);
         newPFlower.addToGroup(PFlowers);
-        console.log(newPFlower);
       }
       else if (r < 0.2){
         //let aFlower = new flowers(x,y,30,60,"purple");
         var newVFlower = createSprite(x,y,5,5);
         newVFlower.addAnimation("default",spriteVFlower);
+        newVFlower.setCollider("rectangle",0,(newVFlower.height/2),newVFlower.width/2,20);
         newVFlower.addToGroup(VFlowers);
       }
       else if (r < 0.3){
         //let aFlower = new flowers(x,y,30,60,"white");
         var newWFlower = createSprite(x,y,5,5);
         newWFlower.addAnimation("default",spriteWFlower);
+        newWFlower.setCollider("rectangle",0,(newWFlower.height/2),newWFlower.width/2,20);
         newWFlower.addToGroup(WFlowers);
       }
       else if (r < 0.4){
         //let aFlower = new flowers(x,y,30,60,"yellow");
         var newYFlower = createSprite(x,y,5,5);
         newYFlower.addAnimation("default",spriteYFlower);
+        newYFlower.setCollider("rectangle",0,(newYFlower.height/2),newYFlower.width/2,20);
         newYFlower.addToGroup(YFlowers);
       }
 
@@ -110,6 +113,7 @@ function setup() {
         //let aFlower = new flowers(x,y,30,60,"yellow");
         var newTYFlower = createSprite(x,y,5,5);
         newTYFlower.addAnimation("default",spriteTYFlower);
+        newTYFlower.setCollider("rectangle",0,(newTYFlower.height/2),newTYFlower.width/2,20);
         newTYFlower.addToGroup(TYFlowers);
       }
 
@@ -117,6 +121,7 @@ function setup() {
         //let aFlower = new flowers(x,y,30,60,"yellow");
         var newTRFlower = createSprite(x,y,5,5);
         newTRFlower.addAnimation("default",spriteTRFlower);
+        newTRFlower.setCollider("rectangle",0,(newTRFlower.height/2),newTRFlower.width/2,20);
         newTRFlower.addToGroup(TRFlowers);
       }
 
@@ -175,8 +180,8 @@ function draw() {
       l = Math.sin(i);
       let p = 0;
       p = Math.cos(i);
-      BFlowers[i].position.x = avatarX+20+(i/2*l);
-      BFlowers[i].position.y = avatarY+(i/2*p);
+      BFlowers[i].position.x = myAvatar.position.x+20+(i/2*l);
+      BFlowers[i].position.y = myAvatar.position.y+(i/2*p);
       //console.log(l);
   }
 }
@@ -224,7 +229,7 @@ function keyPressed() {
       if(myAvatar.overlap(PFlowers[j])){
         PFlowers[j].remove();
         //console.log("overlap");
-        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spritePFlower);
         newBFlower.addToGroup(BFlowers);
       }
@@ -237,7 +242,7 @@ function keyPressed() {
       if(myAvatar.overlap(VFlowers[j])){
         VFlowers[j].remove();
         //console.log("overlap");
-        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spriteVFlower);
         newBFlower.addToGroup(BFlowers);
       }
@@ -250,7 +255,7 @@ function keyPressed() {
       if(myAvatar.overlap(WFlowers[j])){
         WFlowers[j].remove();
         //console.log("overlap");
-        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spriteWFlower);
         newBFlower.addToGroup(BFlowers);
       }
@@ -263,7 +268,7 @@ function keyPressed() {
       if(myAvatar.overlap(YFlowers[j])){
         YFlowers[j].remove();
         //console.log("overlap");
-        newBFlower = createSprite(avatarX,avatarY,5,5);
+        newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spriteYFlower);
         newBFlower.addToGroup(BFlowers);
       }
@@ -276,7 +281,7 @@ function keyPressed() {
         if(myAvatar.overlap(TYFlowers[j])){
           TYFlowers[j].remove();
           //console.log("overlap");
-          newBFlower = createSprite(avatarX,avatarY,5,5);
+          newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
           newBFlower.addAnimation("default",spriteTYFlower);
           newBFlower.addToGroup(BFlowers);
         }
@@ -289,7 +294,7 @@ function keyPressed() {
           if(myAvatar.overlap(TRFlowers[j])){
             TRFlowers[j].remove();
             //console.log("overlap");
-            newBFlower = createSprite(avatarX,avatarY,5,5);
+            newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
             newBFlower.addAnimation("default",spriteTRFlower);
             newBFlower.addToGroup(BFlowers);
           }
