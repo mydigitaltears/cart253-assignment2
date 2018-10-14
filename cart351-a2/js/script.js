@@ -28,7 +28,7 @@ let myTree;
 let nb = 0;
 let grass;
 let rectX = 0;
-let numFlowers = 100;
+let numFlowers = 200;
 
 function preload() {
   //grass = loadImage("assets/images/grass.svg");
@@ -84,28 +84,28 @@ function setup() {
         //let aFlower = new flowers(x,y,30,60,"pink");
         var newPFlower = createSprite(x,y,5,5);
         newPFlower.addAnimation("default",spritePFlower);
-        newPFlower.setCollider("rectangle",0,(newPFlower.height/2),newPFlower.width/2,20);
+        newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
         newPFlower.addToGroup(PFlowers);
       }
       else if (r < 0.2){
         //let aFlower = new flowers(x,y,30,60,"purple");
         var newVFlower = createSprite(x,y,5,5);
         newVFlower.addAnimation("default",spriteVFlower);
-        newVFlower.setCollider("rectangle",0,(newVFlower.height/2),newVFlower.width/2,20);
+        newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
         newVFlower.addToGroup(VFlowers);
       }
       else if (r < 0.3){
         //let aFlower = new flowers(x,y,30,60,"white");
         var newWFlower = createSprite(x,y,5,5);
         newWFlower.addAnimation("default",spriteWFlower);
-        newWFlower.setCollider("rectangle",0,(newWFlower.height/2),newWFlower.width/2,20);
+        newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
         newWFlower.addToGroup(WFlowers);
       }
       else if (r < 0.4){
         //let aFlower = new flowers(x,y,30,60,"yellow");
         var newYFlower = createSprite(x,y,5,5);
         newYFlower.addAnimation("default",spriteYFlower);
-        newYFlower.setCollider("rectangle",0,(newYFlower.height/2),newYFlower.width/2,20);
+        newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
         newYFlower.addToGroup(YFlowers);
       }
 
@@ -113,7 +113,7 @@ function setup() {
         //let aFlower = new flowers(x,y,30,60,"yellow");
         var newTYFlower = createSprite(x,y,5,5);
         newTYFlower.addAnimation("default",spriteTYFlower);
-        newTYFlower.setCollider("rectangle",0,(newTYFlower.height/2),newTYFlower.width/2,20);
+        newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
         newTYFlower.addToGroup(TYFlowers);
       }
 
@@ -121,14 +121,14 @@ function setup() {
         //let aFlower = new flowers(x,y,30,60,"yellow");
         var newTRFlower = createSprite(x,y,5,5);
         newTRFlower.addAnimation("default",spriteTRFlower);
-        newTRFlower.setCollider("rectangle",0,(newTRFlower.height/2),newTRFlower.width/2,20);
+        newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
         newTRFlower.addToGroup(TRFlowers);
       }
 
   }
 
   // generating the grass
-  for (var i = 0; i < 300; i++){
+  for (var i = 0; i < 400; i++){
     var x = random(0,width);
     var y = random(0,height);
 
@@ -137,7 +137,7 @@ function setup() {
   }
 
   // generating the trees
-  for (var i = 0; i < 10; i++){
+  for (var i = 0; i < 5; i++){
     var x = random(0,width);
     var y = random(0,height);
 
@@ -180,8 +180,8 @@ function draw() {
       l = Math.sin(i);
       let p = 0;
       p = Math.cos(i);
-      BFlowers[i].position.x = myAvatar.position.x+20+(i/2*l);
-      BFlowers[i].position.y = myAvatar.position.y+(i/2*p);
+      BFlowers[i].position.x = myAvatar.position.x+20+(i*l);
+      BFlowers[i].position.y = myAvatar.position.y+(i*p);
       //console.log(l);
   }
 }
