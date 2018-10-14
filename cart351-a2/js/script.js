@@ -26,9 +26,7 @@ let myTree;
 //
 // misc variables
 let nb = 0;
-let pinkFlower;
 let grass;
-let index = 0;
 let rectX = 0;
 let numFlowers = 100;
 
@@ -73,6 +71,7 @@ function setup() {
   Avatar.setupAvatar();
   myAvatar = createSprite(avatarX, avatarY, 5, 5);
   myAvatar.addAnimation("default", animSDOWN);
+  myAvatar.setCollider("rectangle",0,(myAvatar.height/2),myAvatar.width/2,15);
   myAvatar.shapeColor = color(255);
   myAvatar.velocity.y = 0;
 
@@ -139,28 +138,27 @@ function setup() {
 
     var newTree = createSprite(x,y,30,60);
     newTree.addAnimation("default",spriteTree);
+    newTree.setCollider("rectangle",0,(newTree.height/2),newTree.width/3,15);
     newTree.addToGroup(myTree);
   }
 }
 
 function draw() {
   background("green");
-  //image(grass, 200, 200, 70, 50);
   Avatar.handleInput();
   //Avatar.drawAvatar();
-  Avatar.moveAvatar();
+  //Avatar.moveAvatar();
+  moveMyAvatar();
   Avatar.stop();
   drawSprites();
-  myAvatar.position.x = avatarX;
-  myAvatar.position.y = avatarY;
+  //myAvatar.position.x = avatarX;
+  //myAvatar.position.y = avatarY;
   //console.log(oo);
-  //console.log(avatarX);
-  //console.log(avatarY);
-  //flower1.drawFlower();
-  //bflower1.drawbFlower();
-  //bflower2.drawbFlower();
-  //aFlower.drawFlower();
   wind();
+  // collide
+  for(var i=0; i<myTree.length; i++){
+    myAvatar.collide(myTree[i]);
+  }
   //set the existing sprites' depths in relation to their position
   for(var i=0; i<allSprites.length; i++) {
     //sprites on the bottom will be drawn first
@@ -183,10 +181,29 @@ function draw() {
   }
 }
 
+function moveMyAvatar(){
+  myAvatar.position.x+= avatarVX;
+  myAvatar.position.y+= avatarVY;
+  if (myAvatar.position.x < 0){
+    myAvatar.position.x= 0;
+  }
+  if (myAvatar.position.x > width){
+    myAvatar.position.x = width;
+  }
+  if (myAvatar.position.y < 0){
+    myAvatar.position.y = 0;
+  }
+  if (myAvatar.position.y > height){
+    myAvatar.position.y = height;
+  }
+}
+
+// to resize window
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
+// wind / cloud test
 function wind() {
   rectX += 2;
   noStroke();
@@ -196,6 +213,8 @@ function wind() {
   }
 }
 
+
+// to remove flowres / avatar sprite animations
 function keyPressed() {
 
   // Remove function test
@@ -305,6 +324,7 @@ function keyPressed() {
   }
 }
 
+// for avatar sprite animations
 function keyReleased() {
   if (keyCode === LEFT_ARROW){
     lea=false;
@@ -330,10 +350,10 @@ function keyReleased() {
   if (upa === true){
     myAvatar.addAnimation("default", animUP);
   }
-} // end of setup
+}
 
+// avatar creation
 let Avatar = new avatar(0,0,80,80,0,0,4,"");
-
 
 // Avatar class
 function avatar(x, y, w, h, vx, vy, s, o){
@@ -428,62 +448,3 @@ function avatar(x, y, w, h, vx, vy, s, o){
     }
   }
 } // end of Avatar class
-
-
-
-// creating some flowers
-// let flower1= new flowers(20,30,30,60,"marguerite");
-// let flower2= new flowers(50,100,30,60,"tulipe");
-// let flower3= new flowers(200,150,30,60,"tournesol");
-//
-// let bflower1= new bflowers(15,5,20,50,"allo");
-// let bflower2= new bflowers(20,10,20,50,"allo");
-//
-//
-//
-// //Adding flowers to bouquet
-// let bouquet=[];
-//
-// //PERSONNAGE PASSE SUR LA FLEUR- EVENT
-// if(event)
-// {
-//   bouquet.push();
-// }
-//
-// function bflowers(x, y ,w, h, nom){
-//   this.xPos=x;
-//   this.yPos=y;
-//   this.width=w;
-//   this.height=h;
-//   this.name=nom;
-//
-//   this.drawbFlower = function() {
-//     //rect(this.xPos+avatarX,this.yPos+avatarY,this.width,this.height);
-//     image(pinkFlower, this.xPos+avatarX, this.yPos+avatarY, this.width, this.height);
-//   }
-// }
-//
-// // flowers Constructor
-//
-// function flowers(x, y, w, h, nom)
-// {
-//   this.xPos=x;
-//   this.yPos=y;
-//   this.width=w;
-//   this.height=h;
-//   this.name=nom;
-//
-//   this.removeFlower=function(){
-//     let d = dist(avatarX, avatarY, this.width,this.height);
-//
-//   }
-//
-//   this.addFlower=function(){
-//
-//   }
-//
-//   this.drawFlower = function() {
-//     image(pinkFlower, this.xPos, this.yPos, this.width, this.height);
-//   }
-//
-// }
