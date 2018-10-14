@@ -1,0 +1,53 @@
+
+
+
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+      color: rgb(49, 50, 64);
+
+
+}
+
+
+
+body{
+  background-color:rgb(138, 215, 76);
+font-family: 'Niramit', sans-serif;
+  text-align: center;
+  color: rgb(49, 50, 64);
+  text-decoration: initial;
+}
+
+h1{
+  padding-top: 150px;
+  font-size: 60px;
+
+}
+
+h2{
+  font-size: 40px;
+}
+
+h3{
+  font-size: 28px;
+}
+
+
+.button_style{
+
+
+    border-radius: 60px;
+    font-family: 'Niramit', sans-serif;
+    width: 240px;
+    height: 50px;
+    font-size: 24px;
+    background-color:rgb(220, 228, 178);
+    text-decoration:none;
+
+
+
+
+
+}

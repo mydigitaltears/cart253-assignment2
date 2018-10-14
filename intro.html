@@ -1,0 +1,87 @@
+
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- CSS stylesheet(s) -->
+  <link rel="stylesheet" type="text/css" href="styles2.css" />
+
+  <title> Intro </title>
+  </head>
+  <body>
+
+    <script>
+    window.onload = function(){
+
+      document.getElementById("butt1").addEventListener("mouseover", opa_in_butt1)
+      document.getElementById("butt1").addEventListener("mouseout", opa_out_butt1)
+      document.getElementById("butt2").addEventListener("mouseover", opa_in_butt2)
+      document.getElementById("butt2").addEventListener("mouseout", opa_out_butt2)
+      document.getElementById("butt3").addEventListener("mouseover", opa_in_butt3)
+      document.getElementById("butt3").addEventListener("mouseout", opa_out_butt3)
+      document.getElementById("butt4").addEventListener("mouseover", opa_in_butt4)
+      document.getElementById("butt4").addEventListener("mouseout", opa_out_butt4)
+
+
+      function opa_in_butt1(event)
+      {
+          document.getElementById("butt1").style.background="rgb(214, 211, 137)";
+      }
+      function opa_out_butt1(event)
+      {
+          document.getElementById("butt1").style.background="rgb(220, 228, 178)";
+      }
+
+
+      function opa_in_butt2(event)
+      {
+          document.getElementById("butt2").style.background="rgb(214, 211, 137)";
+
+      }
+      function opa_out_butt2(event)
+      {
+          document.getElementById("butt2").style.background="rgb(220, 228, 178)";
+
+      }
+
+
+      function opa_in_butt3(event)
+      {
+          document.getElementById("butt3").style.background="rgb(214, 211, 137)";
+
+      }
+      function opa_out_butt3(event)
+      {
+          document.getElementById("butt3").style.background="rgb(220, 228, 178)";
+
+      }
+
+      function opa_in_butt4(event)
+      {
+          document.getElementById("butt4").style.background="rgb(214, 211, 137)";
+
+      }
+      function opa_out_butt4(event)
+      {
+          document.getElementById("butt4").style.background="rgb(220, 228, 178)";
+
+      }
+    }
+
+
+
+    </script>
+
+  <h1>Dreaming of <img id"whiteFlower" src="cart351-a2/assets/images/whiteFlower.png">   all day? We do too.</h2>
+  <h2>Let us satisfy (virtually) your desires!</h2>
+  <h3>But first, tell us how much you love flowers.</h3>
+    <p>(It will help us to gage how big you'd like your bouquet)</p>
+
+  <div>
+    <button id="butt1" class="button_style"><a href="cart351-a2/index.html">A little</a></button>
+  <button href=""  id="butt2" class="button_style"><a href="cart351-a2/index.html">A lot</a></button>
+  <button href=""  id="butt3" class="button_style"><a href="cart351-a2/index.html">Enormously</a></button>
+  <button href=""  id="butt4" class="button_style"><a href="cart351-a2/index.html">To madness</a></button>
+</div>
+  </body>
+  </html>
