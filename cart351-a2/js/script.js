@@ -1,11 +1,7 @@
-//variables
-let avatarX;
-let avatarY;
+//avatar variables
 let avatarVX = 0;
 let avatarVY = 0;
 let avatarSpeed = 2;
-let avatarWidth = 40;
-let avatarHeight = 40;
 let orientation;
 let oo;
 let upa = false;
@@ -23,20 +19,13 @@ let TYFlowers;
 let TRFlowers;
 let myGrass;
 let myTree;
-//
 // misc variables
-let nb = 0;
-let grass;
-let rectX = 0;
 let song;
 let birds;
 let sbool = false;
-let tbool = false;
 let numFlowers = 0;
 
 function preload() {
-  //grass = loadImage("assets/images/grass.svg");
-  //pinkFlower = loadImage("assets/images/pinkF.png");
   birds = loadSound("assets/sounds/birds.mp3");
   song = loadSound("assets/sounds/song2.mp3");
   spriteTree = loadAnimation("assets/images/tree.png");
@@ -79,10 +68,6 @@ function setup() {
   myAvatar.addAnimation("default", animSDOWN);
   myAvatar.setCollider("rectangle",0,(myAvatar.height/2),myAvatar.width/2,20);
   myAvatar.shapeColor = color(255);
-  myAvatar.velocity.y = 0;
-
-
-
   // generating the grass
   for (var i = 0; i < 400; i++){
     var x = random(0,width);
@@ -107,14 +92,9 @@ function setup() {
 function draw() {
   background("green");
   handleInput();
-  //Avatar.drawAvatar();
-  //Avatar.moveAvatar();
   moveMyAvatar();
   stop();
   drawSprites();
-  //myAvatar.position.x = avatarX;
-  //myAvatar.position.y = avatarY;
-  //console.log(oo);
   // collide
   for(var i=0; i<myTree.length; i++){
     myAvatar.collide(myTree[i]);
@@ -124,7 +104,6 @@ function draw() {
     //sprites on the bottom will be drawn first
     var pos = allSprites[i].position.y;
     var hei = allSprites[i].height/2;
-    // console.log(hei);
     allSprites[i].depth = pos+hei;
     //you can link the scale to the y position to simulate perspective
     //allSprites[i].scale = map(allSprites[i].position.y, 0, height, 0.2, 1);
@@ -137,9 +116,7 @@ function draw() {
       p = Math.cos(i);
       BFlowers[i].position.x = myAvatar.position.x+25+(i/1*l);
       BFlowers[i].position.y = myAvatar.position.y+5+(i/1*p);
-      //console.log(l);
   }
-  someText();
 } // end of draw()
 
 function moveMyAvatar(){
@@ -174,7 +151,6 @@ function handleInput() {
   else {
     avatarVX = 0;
   }
-
   // Check for vertical movement
   if (keyIsDown(UP_ARROW)) {
     avatarVY = -avatarSpeed;
@@ -190,7 +166,7 @@ function handleInput() {
     avatarVY = 0;
   }
 }
-
+// animation when avatar is stopped
 function stop(){
   if (avatarVX === 0 && avatarVY ===0){
     if (orientation === animLEFT){
@@ -213,102 +189,64 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function someText(){
-  if (tbool === false){
-    // fill(36, 86, 193);
-    // noStroke();
-    // rectMode(CENTER);
-    // rect(width-160,57,210,60);
-    // textSize(20);
-    // textFont("helvetica");
-    // textStyle("bold");
-    // fill(255);
-    // textAlign(CENTER);
-    // text("press ENTER to \nplay or stop music :)", width-160, 50);
-  }
-  else {}
-
-}
-// // wind / cloud test
-// function wind() {
-//   rectX += 2;
-//   noStroke();
-//   rect(rectX,100+sin(rectX*50)*3,100,5);
-//   if (rectX > width){
-//     rectX = -100;
-//   }
-// }
-
-
 // to remove flowres / avatar sprite animations
 function keyPressed() {
-
-  // Remove function test
+  // Remove functions
   for(var j = 0; j<PFlowers.length;j++){
     var f = PFlowers[j];
     if(keyCode === SHIFT){
       if(myAvatar.overlap(PFlowers[j])){
         PFlowers[j].remove();
-        //console.log("overlap");
         newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spritePFlower);
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
-
   for(var j = 0; j<VFlowers.length;j++){
     var f = VFlowers[j];
     if(keyCode === SHIFT){
       if(myAvatar.overlap(VFlowers[j])){
         VFlowers[j].remove();
-        //console.log("overlap");
         newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spriteVFlower);
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
-
   for(var j = 0; j<WFlowers.length;j++){
     var f = WFlowers[j];
     if(keyCode === SHIFT){
       if(myAvatar.overlap(WFlowers[j])){
         WFlowers[j].remove();
-        //console.log("overlap");
         newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spriteWFlower);
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
-
   for(var j = 0; j<YFlowers.length;j++){
     var f = YFlowers[j];
     if(keyCode === SHIFT){
       if(myAvatar.overlap(YFlowers[j])){
         YFlowers[j].remove();
-        //console.log("overlap");
         newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
         newBFlower.addAnimation("default",spriteYFlower);
         newBFlower.addToGroup(BFlowers);
       }
     }
   }
-
   for(var j = 0; j<TYFlowers.length;j++){
       var f = TYFlowers[j];
       if(keyCode === SHIFT){
         if(myAvatar.overlap(TYFlowers[j])){
           TYFlowers[j].remove();
-          //console.log("overlap");
           newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
           newBFlower.addAnimation("default",spriteTYFlower);
           newBFlower.addToGroup(BFlowers);
         }
       }
   }
-
   for(var j = 0; j<TRFlowers.length;j++){
       var f = TRFlowers[j];
       if(keyCode === SHIFT){
@@ -320,14 +258,13 @@ function keyPressed() {
           newBFlower.addToGroup(BFlowers);
         }
       }
-  }
+  } // end of remove functions
 
-  // enter for song
+  // ENTER for song
   if (keyCode === ENTER){
     if (sbool === false){
         song.loop();
         sbool = true;
-        tbool = true;
     }
     else if (sbool === true){
       song.stop();
@@ -389,228 +326,72 @@ function keyReleased() {
   }
 }
 
-
-      function butt1click(){
-        numFlowers = 50;
-        console.log(numFlowers);
-        document.getElementById("items").style.display="none";
-        // generating the flowers
-        for (var i = 0; i < numFlowers; i++){
-          var x = random(0,width);
-          var y = random(0,height);
-          r = random(0,0.6)
-            if (r < 0.1){
-              //let aFlower = new flowers(x,y,30,60,"pink");
-              var newPFlower = createSprite(x,y,5,5);
-              newPFlower.addAnimation("default",spritePFlower);
-              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
-              newPFlower.addToGroup(PFlowers);
-            }
-            else if (r < 0.2){
-              //let aFlower = new flowers(x,y,30,60,"purple");
-              var newVFlower = createSprite(x,y,5,5);
-              newVFlower.addAnimation("default",spriteVFlower);
-              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
-              newVFlower.addToGroup(VFlowers);
-            }
-            else if (r < 0.3){
-              //let aFlower = new flowers(x,y,30,60,"white");
-              var newWFlower = createSprite(x,y,5,5);
-              newWFlower.addAnimation("default",spriteWFlower);
-              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
-              newWFlower.addToGroup(WFlowers);
-            }
-            else if (r < 0.4){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newYFlower = createSprite(x,y,5,5);
-              newYFlower.addAnimation("default",spriteYFlower);
-              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
-              newYFlower.addToGroup(YFlowers);
-            }
-
-            else if (r < 0.5){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTYFlower = createSprite(x,y,5,5);
-              newTYFlower.addAnimation("default",spriteTYFlower);
-              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
-              newTYFlower.addToGroup(TYFlowers);
-            }
-
-            else if (r < 0.6){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTRFlower = createSprite(x,y,5,5);
-              newTRFlower.addAnimation("default",spriteTRFlower);
-              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
-              newTRFlower.addToGroup(TRFlowers);
-            }
-
-        }
+function createFlowers(){
+  // generating the flowers
+  for (var i = 0; i < numFlowers; i++){
+    var x = random(0,width);
+    var y = random(0,height);
+    r = random(0,0.6)
+      if (r < 0.1){
+        var newPFlower = createSprite(x,y,5,5);
+        newPFlower.addAnimation("default",spritePFlower);
+        newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
+        newPFlower.addToGroup(PFlowers);
       }
-
-      function butt2click(){
-        numFlowers = 100;
-        document.getElementById("items").style.display="none";
-        // generating the flowers
-        for (var i = 0; i < numFlowers; i++){
-          var x = random(0,width);
-          var y = random(0,height);
-          r = random(0,0.6)
-            if (r < 0.1){
-              //let aFlower = new flowers(x,y,30,60,"pink");
-              var newPFlower = createSprite(x,y,5,5);
-              newPFlower.addAnimation("default",spritePFlower);
-              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
-              newPFlower.addToGroup(PFlowers);
-            }
-            else if (r < 0.2){
-              //let aFlower = new flowers(x,y,30,60,"purple");
-              var newVFlower = createSprite(x,y,5,5);
-              newVFlower.addAnimation("default",spriteVFlower);
-              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
-              newVFlower.addToGroup(VFlowers);
-            }
-            else if (r < 0.3){
-              //let aFlower = new flowers(x,y,30,60,"white");
-              var newWFlower = createSprite(x,y,5,5);
-              newWFlower.addAnimation("default",spriteWFlower);
-              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
-              newWFlower.addToGroup(WFlowers);
-            }
-            else if (r < 0.4){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newYFlower = createSprite(x,y,5,5);
-              newYFlower.addAnimation("default",spriteYFlower);
-              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
-              newYFlower.addToGroup(YFlowers);
-            }
-
-            else if (r < 0.5){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTYFlower = createSprite(x,y,5,5);
-              newTYFlower.addAnimation("default",spriteTYFlower);
-              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
-              newTYFlower.addToGroup(TYFlowers);
-            }
-
-            else if (r < 0.6){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTRFlower = createSprite(x,y,5,5);
-              newTRFlower.addAnimation("default",spriteTRFlower);
-              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
-              newTRFlower.addToGroup(TRFlowers);
-            }
-
-        }
+      else if (r < 0.2){
+        var newVFlower = createSprite(x,y,5,5);
+        newVFlower.addAnimation("default",spriteVFlower);
+        newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
+        newVFlower.addToGroup(VFlowers);
       }
-
-      function butt3click(){
-        numFlowers = 250;
-        document.getElementById("items").style.display="none";
-        // generating the flowers
-        for (var i = 0; i < numFlowers; i++){
-          var x = random(0,width);
-          var y = random(0,height);
-          r = random(0,0.6)
-            if (r < 0.1){
-              //let aFlower = new flowers(x,y,30,60,"pink");
-              var newPFlower = createSprite(x,y,5,5);
-              newPFlower.addAnimation("default",spritePFlower);
-              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
-              newPFlower.addToGroup(PFlowers);
-            }
-            else if (r < 0.2){
-              //let aFlower = new flowers(x,y,30,60,"purple");
-              var newVFlower = createSprite(x,y,5,5);
-              newVFlower.addAnimation("default",spriteVFlower);
-              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
-              newVFlower.addToGroup(VFlowers);
-            }
-            else if (r < 0.3){
-              //let aFlower = new flowers(x,y,30,60,"white");
-              var newWFlower = createSprite(x,y,5,5);
-              newWFlower.addAnimation("default",spriteWFlower);
-              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
-              newWFlower.addToGroup(WFlowers);
-            }
-            else if (r < 0.4){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newYFlower = createSprite(x,y,5,5);
-              newYFlower.addAnimation("default",spriteYFlower);
-              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
-              newYFlower.addToGroup(YFlowers);
-            }
-
-            else if (r < 0.5){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTYFlower = createSprite(x,y,5,5);
-              newTYFlower.addAnimation("default",spriteTYFlower);
-              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
-              newTYFlower.addToGroup(TYFlowers);
-            }
-
-            else if (r < 0.6){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTRFlower = createSprite(x,y,5,5);
-              newTRFlower.addAnimation("default",spriteTRFlower);
-              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
-              newTRFlower.addToGroup(TRFlowers);
-            }
-
-        }
+      else if (r < 0.3){
+        var newWFlower = createSprite(x,y,5,5);
+        newWFlower.addAnimation("default",spriteWFlower);
+        newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
+        newWFlower.addToGroup(WFlowers);
       }
-
-      function butt4click(){
-        numFlowers = 1000;
-        document.getElementById("items").style.display="none";
-        // generating the flowers
-        for (var i = 0; i < numFlowers; i++){
-          var x = random(0,width);
-          var y = random(0,height);
-          r = random(0,0.6)
-            if (r < 0.1){
-              //let aFlower = new flowers(x,y,30,60,"pink");
-              var newPFlower = createSprite(x,y,5,5);
-              newPFlower.addAnimation("default",spritePFlower);
-              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
-              newPFlower.addToGroup(PFlowers);
-            }
-            else if (r < 0.2){
-              //let aFlower = new flowers(x,y,30,60,"purple");
-              var newVFlower = createSprite(x,y,5,5);
-              newVFlower.addAnimation("default",spriteVFlower);
-              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
-              newVFlower.addToGroup(VFlowers);
-            }
-            else if (r < 0.3){
-              //let aFlower = new flowers(x,y,30,60,"white");
-              var newWFlower = createSprite(x,y,5,5);
-              newWFlower.addAnimation("default",spriteWFlower);
-              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
-              newWFlower.addToGroup(WFlowers);
-            }
-            else if (r < 0.4){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newYFlower = createSprite(x,y,5,5);
-              newYFlower.addAnimation("default",spriteYFlower);
-              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
-              newYFlower.addToGroup(YFlowers);
-            }
-
-            else if (r < 0.5){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTYFlower = createSprite(x,y,5,5);
-              newTYFlower.addAnimation("default",spriteTYFlower);
-              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
-              newTYFlower.addToGroup(TYFlowers);
-            }
-
-            else if (r < 0.6){
-              //let aFlower = new flowers(x,y,30,60,"yellow");
-              var newTRFlower = createSprite(x,y,5,5);
-              newTRFlower.addAnimation("default",spriteTRFlower);
-              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
-              newTRFlower.addToGroup(TRFlowers);
-            }
-
-        }
+      else if (r < 0.4){
+        var newYFlower = createSprite(x,y,5,5);
+        newYFlower.addAnimation("default",spriteYFlower);
+        newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
+        newYFlower.addToGroup(YFlowers);
       }
+      else if (r < 0.5){
+        var newTYFlower = createSprite(x,y,5,5);
+        newTYFlower.addAnimation("default",spriteTYFlower);
+        newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
+        newTYFlower.addToGroup(TYFlowers);
+      }
+      else if (r < 0.6){
+        var newTRFlower = createSprite(x,y,5,5);
+        newTRFlower.addAnimation("default",spriteTRFlower);
+        newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
+        newTRFlower.addToGroup(TRFlowers);
+      }
+  }
+}
+
+//creating flowers at intro
+function butt1click(){
+  numFlowers = 50;
+  document.getElementById("items").style.display="none";
+  createFlowers();
+}
+
+function butt2click(){
+  numFlowers = 100;
+  document.getElementById("items").style.display="none";
+  createFlowers();
+}
+
+function butt3click(){
+  numFlowers = 250;
+  document.getElementById("items").style.display="none";
+  createFlowers();
+}
+
+function butt4click(){
+  numFlowers = 1000;
+  document.getElementById("items").style.display="none";
+  createFlowers();
+}
