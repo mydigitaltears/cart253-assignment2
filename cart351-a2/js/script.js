@@ -215,16 +215,16 @@ function windowResized() {
 
 function someText(){
   if (tbool === false){
-    fill(36, 86, 193);
-    noStroke();
-    rectMode(CENTER);
-    rect(width-160,57,210,60);
-    textSize(20);
-    textFont("helvetica");
-    textStyle("bold");
-    fill(255);
-    textAlign(CENTER);
-    text("press ENTER to \nplay or stop music :)", width-160, 50);
+    // fill(36, 86, 193);
+    // noStroke();
+    // rectMode(CENTER);
+    // rect(width-160,57,210,60);
+    // textSize(20);
+    // textFont("helvetica");
+    // textStyle("bold");
+    // fill(255);
+    // textAlign(CENTER);
+    // text("press ENTER to \nplay or stop music :)", width-160, 50);
   }
   else {}
 

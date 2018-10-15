@@ -25,14 +25,20 @@ h1{
   padding-top: 150px;
   font-size: 60px;
   margin-top: -90px;
+  margin-bottom:0px;
 }
 
 h2{
   font-size: 40px;
+  margin:0px;
 }
 
 h3{
   font-size: 28px;
+  margin:20px;
+}
+p{
+  margin:10px;
 }
 
 #items{
