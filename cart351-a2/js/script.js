@@ -28,11 +28,14 @@ let myTree;
 let nb = 0;
 let grass;
 let rectX = 0;
-let numFlowers = 200;
+let song;
+let sbool = false;
+let numFlowers = 50;
 
 function preload() {
   //grass = loadImage("assets/images/grass.svg");
   //pinkFlower = loadImage("assets/images/pinkF.png");
+  song = loadSound("assets/sounds/song2.mp3");
   spriteTree = loadAnimation("assets/images/tree.png");
   spriteGrass = loadAnimation("assets/images/grass2.png");
   spriteTYFlower = loadAnimation("assets/images/tulippeJ.png");
@@ -225,7 +228,7 @@ function keyPressed() {
   // Remove function test
   for(var j = 0; j<PFlowers.length;j++){
     var f = PFlowers[j];
-    if(keyCode === ENTER){
+    if(keyCode === SHIFT){
       if(myAvatar.overlap(PFlowers[j])){
         PFlowers[j].remove();
         //console.log("overlap");
@@ -238,7 +241,7 @@ function keyPressed() {
 
   for(var j = 0; j<VFlowers.length;j++){
     var f = VFlowers[j];
-    if(keyCode === ENTER){
+    if(keyCode === SHIFT){
       if(myAvatar.overlap(VFlowers[j])){
         VFlowers[j].remove();
         //console.log("overlap");
@@ -251,7 +254,7 @@ function keyPressed() {
 
   for(var j = 0; j<WFlowers.length;j++){
     var f = WFlowers[j];
-    if(keyCode === ENTER){
+    if(keyCode === SHIFT){
       if(myAvatar.overlap(WFlowers[j])){
         WFlowers[j].remove();
         //console.log("overlap");
@@ -264,7 +267,7 @@ function keyPressed() {
 
   for(var j = 0; j<YFlowers.length;j++){
     var f = YFlowers[j];
-    if(keyCode === ENTER){
+    if(keyCode === SHIFT){
       if(myAvatar.overlap(YFlowers[j])){
         YFlowers[j].remove();
         //console.log("overlap");
@@ -277,7 +280,7 @@ function keyPressed() {
 
   for(var j = 0; j<TYFlowers.length;j++){
       var f = TYFlowers[j];
-      if(keyCode === ENTER){
+      if(keyCode === SHIFT){
         if(myAvatar.overlap(TYFlowers[j])){
           TYFlowers[j].remove();
           //console.log("overlap");
@@ -290,7 +293,7 @@ function keyPressed() {
 
     for(var j = 0; j<TRFlowers.length;j++){
         var f = TRFlowers[j];
-        if(keyCode === ENTER){
+        if(keyCode === SHIFT){
           if(myAvatar.overlap(TRFlowers[j])){
             TRFlowers[j].remove();
             //console.log("overlap");
@@ -301,7 +304,17 @@ function keyPressed() {
         }
       }
 
-
+  // enter for song
+  if (keyCode === ENTER){
+    if (sbool === false){
+        song.loop();
+        sbool = true;
+    }
+    else if (sbool === true){
+      song.stop();
+      sbool = false;
+    }
+  }
   // orientation for animation
   if (keyCode === LEFT_ARROW){
     lea=true;
