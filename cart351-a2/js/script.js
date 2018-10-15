@@ -31,7 +31,7 @@ let rectX = 0;
 let song;
 let sbool = false;
 let tbool = false;
-let numFlowers = 50;
+let numFlowers = 0;
 
 function preload() {
   //grass = loadImage("assets/images/grass.svg");
@@ -78,57 +78,7 @@ function setup() {
   myAvatar.shapeColor = color(255);
   myAvatar.velocity.y = 0;
 
-  // generating the flowers
-  for (var i = 0; i < numFlowers; i++){
-    var x = random(0,width);
-    var y = random(0,height);
-    r = random(0,0.6)
-      if (r < 0.1){
-        //let aFlower = new flowers(x,y,30,60,"pink");
-        var newPFlower = createSprite(x,y,5,5);
-        newPFlower.addAnimation("default",spritePFlower);
-        newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
-        newPFlower.addToGroup(PFlowers);
-      }
-      else if (r < 0.2){
-        //let aFlower = new flowers(x,y,30,60,"purple");
-        var newVFlower = createSprite(x,y,5,5);
-        newVFlower.addAnimation("default",spriteVFlower);
-        newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
-        newVFlower.addToGroup(VFlowers);
-      }
-      else if (r < 0.3){
-        //let aFlower = new flowers(x,y,30,60,"white");
-        var newWFlower = createSprite(x,y,5,5);
-        newWFlower.addAnimation("default",spriteWFlower);
-        newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
-        newWFlower.addToGroup(WFlowers);
-      }
-      else if (r < 0.4){
-        //let aFlower = new flowers(x,y,30,60,"yellow");
-        var newYFlower = createSprite(x,y,5,5);
-        newYFlower.addAnimation("default",spriteYFlower);
-        newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
-        newYFlower.addToGroup(YFlowers);
-      }
 
-      else if (r < 0.5){
-        //let aFlower = new flowers(x,y,30,60,"yellow");
-        var newTYFlower = createSprite(x,y,5,5);
-        newTYFlower.addAnimation("default",spriteTYFlower);
-        newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
-        newTYFlower.addToGroup(TYFlowers);
-      }
-
-      else if (r < 0.6){
-        //let aFlower = new flowers(x,y,30,60,"yellow");
-        var newTRFlower = createSprite(x,y,5,5);
-        newTRFlower.addAnimation("default",spriteTRFlower);
-        newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
-        newTRFlower.addToGroup(TRFlowers);
-      }
-
-  }
 
   // generating the grass
   for (var i = 0; i < 400; i++){
@@ -161,7 +111,7 @@ function draw() {
   drawSprites();
   //myAvatar.position.x = avatarX;
   //myAvatar.position.y = avatarY;
-  console.log(oo);
+  //console.log(oo);
   wind();
   // collide
   for(var i=0; i<myTree.length; i++){
@@ -183,8 +133,8 @@ function draw() {
       l = Math.sin(i);
       let p = 0;
       p = Math.cos(i);
-      BFlowers[i].position.x = myAvatar.position.x+20+(i/1.5*l);
-      BFlowers[i].position.y = myAvatar.position.y+(i/1.5*p);
+      BFlowers[i].position.x = myAvatar.position.x+25+(i/1*l);
+      BFlowers[i].position.y = myAvatar.position.y+5+(i/1*p);
       //console.log(l);
   }
   someText();
@@ -436,63 +386,228 @@ function keyReleased() {
   }
 }
 
-// // avatar creation
-// let Avatar = new avatar(0,0,80,80,0,0,4,"");
-//
-// // Avatar class
-// function avatar(x, y, w, h, vx, vy, s, o){
-//   avatarX=x;
-//   avatarY=y;
-//   avatarWidth=w;
-//   avatarHeight=h;
-//   avatarVX=vx;
-//   avatarVY=vy;
-//   avatarSpeed=s;
-//   orientation=o;
-//
-//   this.setupAvatar = function(){
-//     avatarX = width/2;
-//     avatarY = height/2;
-//   }
-//
-//   this.drawAvatar = function(){
-//     ellipse(avatarX,avatarY,avatarWidth,avatarHeight);
-//   }
-//
-//   this.moveAvatar = function(){
-//     avatarX += avatarVX;
-//     avatarY += avatarVY;
-//     if (avatarX < 0){
-//       avatarX= 0;
-//     }
-//     if (avatarX > width){
-//       avatarX = width;
-//     }
-//     if (avatarY < 0){
-//       avatarY = 0;
-//     }
-//     if (avatarY > height){
-//       avatarY = height;
-//     }
-//   }
-//
-//
-//
-//   this.stop = function(){
-//     if (avatarVX === 0 && avatarVY ===0){
-//       if (orientation === animLEFT){
-//         myAvatar.addAnimation("default", animSLEFT);
-//       }
-//       else if (orientation === animRIGHT){
-//         myAvatar.addAnimation("default", animSRIGHT);
-//       }
-//       else if (orientation === animDOWN){
-//         myAvatar.addAnimation("default", animSDOWN);
-//       }
-//       else if (orientation === animUP){
-//         myAvatar.addAnimation("default", animSUP);
-//       }
-//     }
-//   }
-//
-// } // end of Avatar class
+
+      function butt1click(){
+        numFlowers = 10;
+        console.log(numFlowers);
+        document.getElementById("items").style.display="none";
+        // generating the flowers
+        for (var i = 0; i < numFlowers; i++){
+          var x = random(0,width);
+          var y = random(0,height);
+          r = random(0,0.6)
+            if (r < 0.1){
+              //let aFlower = new flowers(x,y,30,60,"pink");
+              var newPFlower = createSprite(x,y,5,5);
+              newPFlower.addAnimation("default",spritePFlower);
+              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
+              newPFlower.addToGroup(PFlowers);
+            }
+            else if (r < 0.2){
+              //let aFlower = new flowers(x,y,30,60,"purple");
+              var newVFlower = createSprite(x,y,5,5);
+              newVFlower.addAnimation("default",spriteVFlower);
+              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
+              newVFlower.addToGroup(VFlowers);
+            }
+            else if (r < 0.3){
+              //let aFlower = new flowers(x,y,30,60,"white");
+              var newWFlower = createSprite(x,y,5,5);
+              newWFlower.addAnimation("default",spriteWFlower);
+              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
+              newWFlower.addToGroup(WFlowers);
+            }
+            else if (r < 0.4){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newYFlower = createSprite(x,y,5,5);
+              newYFlower.addAnimation("default",spriteYFlower);
+              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
+              newYFlower.addToGroup(YFlowers);
+            }
+
+            else if (r < 0.5){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTYFlower = createSprite(x,y,5,5);
+              newTYFlower.addAnimation("default",spriteTYFlower);
+              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
+              newTYFlower.addToGroup(TYFlowers);
+            }
+
+            else if (r < 0.6){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTRFlower = createSprite(x,y,5,5);
+              newTRFlower.addAnimation("default",spriteTRFlower);
+              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
+              newTRFlower.addToGroup(TRFlowers);
+            }
+
+        }
+      }
+
+      function butt2click(){
+        numFlowers = 50;
+        document.getElementById("items").style.display="none";
+        // generating the flowers
+        for (var i = 0; i < numFlowers; i++){
+          var x = random(0,width);
+          var y = random(0,height);
+          r = random(0,0.6)
+            if (r < 0.1){
+              //let aFlower = new flowers(x,y,30,60,"pink");
+              var newPFlower = createSprite(x,y,5,5);
+              newPFlower.addAnimation("default",spritePFlower);
+              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
+              newPFlower.addToGroup(PFlowers);
+            }
+            else if (r < 0.2){
+              //let aFlower = new flowers(x,y,30,60,"purple");
+              var newVFlower = createSprite(x,y,5,5);
+              newVFlower.addAnimation("default",spriteVFlower);
+              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
+              newVFlower.addToGroup(VFlowers);
+            }
+            else if (r < 0.3){
+              //let aFlower = new flowers(x,y,30,60,"white");
+              var newWFlower = createSprite(x,y,5,5);
+              newWFlower.addAnimation("default",spriteWFlower);
+              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
+              newWFlower.addToGroup(WFlowers);
+            }
+            else if (r < 0.4){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newYFlower = createSprite(x,y,5,5);
+              newYFlower.addAnimation("default",spriteYFlower);
+              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
+              newYFlower.addToGroup(YFlowers);
+            }
+
+            else if (r < 0.5){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTYFlower = createSprite(x,y,5,5);
+              newTYFlower.addAnimation("default",spriteTYFlower);
+              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
+              newTYFlower.addToGroup(TYFlowers);
+            }
+
+            else if (r < 0.6){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTRFlower = createSprite(x,y,5,5);
+              newTRFlower.addAnimation("default",spriteTRFlower);
+              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
+              newTRFlower.addToGroup(TRFlowers);
+            }
+
+        }
+      }
+
+      function butt3click(){
+        numFlowers = 100;
+        document.getElementById("items").style.display="none";
+        // generating the flowers
+        for (var i = 0; i < numFlowers; i++){
+          var x = random(0,width);
+          var y = random(0,height);
+          r = random(0,0.6)
+            if (r < 0.1){
+              //let aFlower = new flowers(x,y,30,60,"pink");
+              var newPFlower = createSprite(x,y,5,5);
+              newPFlower.addAnimation("default",spritePFlower);
+              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
+              newPFlower.addToGroup(PFlowers);
+            }
+            else if (r < 0.2){
+              //let aFlower = new flowers(x,y,30,60,"purple");
+              var newVFlower = createSprite(x,y,5,5);
+              newVFlower.addAnimation("default",spriteVFlower);
+              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
+              newVFlower.addToGroup(VFlowers);
+            }
+            else if (r < 0.3){
+              //let aFlower = new flowers(x,y,30,60,"white");
+              var newWFlower = createSprite(x,y,5,5);
+              newWFlower.addAnimation("default",spriteWFlower);
+              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
+              newWFlower.addToGroup(WFlowers);
+            }
+            else if (r < 0.4){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newYFlower = createSprite(x,y,5,5);
+              newYFlower.addAnimation("default",spriteYFlower);
+              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
+              newYFlower.addToGroup(YFlowers);
+            }
+
+            else if (r < 0.5){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTYFlower = createSprite(x,y,5,5);
+              newTYFlower.addAnimation("default",spriteTYFlower);
+              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
+              newTYFlower.addToGroup(TYFlowers);
+            }
+
+            else if (r < 0.6){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTRFlower = createSprite(x,y,5,5);
+              newTRFlower.addAnimation("default",spriteTRFlower);
+              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
+              newTRFlower.addToGroup(TRFlowers);
+            }
+
+        }
+      }
+
+      function butt4click(){
+        numFlowers = 500;
+        document.getElementById("items").style.display="none";
+        // generating the flowers
+        for (var i = 0; i < numFlowers; i++){
+          var x = random(0,width);
+          var y = random(0,height);
+          r = random(0,0.6)
+            if (r < 0.1){
+              //let aFlower = new flowers(x,y,30,60,"pink");
+              var newPFlower = createSprite(x,y,5,5);
+              newPFlower.addAnimation("default",spritePFlower);
+              newPFlower.setCollider("rectangle",0,(newPFlower.height/3),newPFlower.width/2,40);
+              newPFlower.addToGroup(PFlowers);
+            }
+            else if (r < 0.2){
+              //let aFlower = new flowers(x,y,30,60,"purple");
+              var newVFlower = createSprite(x,y,5,5);
+              newVFlower.addAnimation("default",spriteVFlower);
+              newVFlower.setCollider("rectangle",0,(newVFlower.height/3),newVFlower.width/2,40);
+              newVFlower.addToGroup(VFlowers);
+            }
+            else if (r < 0.3){
+              //let aFlower = new flowers(x,y,30,60,"white");
+              var newWFlower = createSprite(x,y,5,5);
+              newWFlower.addAnimation("default",spriteWFlower);
+              newWFlower.setCollider("rectangle",0,(newWFlower.height/3),newWFlower.width/2,40);
+              newWFlower.addToGroup(WFlowers);
+            }
+            else if (r < 0.4){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newYFlower = createSprite(x,y,5,5);
+              newYFlower.addAnimation("default",spriteYFlower);
+              newYFlower.setCollider("rectangle",0,(newYFlower.height/3),newYFlower.width/2,40);
+              newYFlower.addToGroup(YFlowers);
+            }
+
+            else if (r < 0.5){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTYFlower = createSprite(x,y,5,5);
+              newTYFlower.addAnimation("default",spriteTYFlower);
+              newTYFlower.setCollider("rectangle",0,(newTYFlower.height/3),newTYFlower.width/2,40);
+              newTYFlower.addToGroup(TYFlowers);
+            }
+
+            else if (r < 0.6){
+              //let aFlower = new flowers(x,y,30,60,"yellow");
+              var newTRFlower = createSprite(x,y,5,5);
+              newTRFlower.addAnimation("default",spriteTRFlower);
+              newTRFlower.setCollider("rectangle",0,(newTRFlower.height/3),newTRFlower.width/2,40);
+              newTRFlower.addToGroup(TRFlowers);
+            }
+
+        }
+      }
