@@ -30,6 +30,7 @@ let grass;
 let rectX = 0;
 let song;
 let sbool = false;
+let tbool = false;
 let numFlowers = 50;
 
 function preload() {
@@ -71,8 +72,7 @@ function setup() {
   TYFlowers = new Group();
   TRFlowers = new Group();
   myTree = new Group();
-  Avatar.setupAvatar();
-  myAvatar = createSprite(avatarX, avatarY, 5, 5);
+  myAvatar = createSprite(width/2, height/2, 5, 5);
   myAvatar.addAnimation("default", animSDOWN);
   myAvatar.setCollider("rectangle",0,(myAvatar.height/2),myAvatar.width/2,20);
   myAvatar.shapeColor = color(255);
@@ -140,7 +140,7 @@ function setup() {
   }
 
   // generating the trees
-  for (var i = 0; i < 5; i++){
+  for (var i = 0; i < 4; i++){
     var x = random(0,width);
     var y = random(0,height);
 
@@ -153,15 +153,15 @@ function setup() {
 
 function draw() {
   background("green");
-  Avatar.handleInput();
+  handleInput();
   //Avatar.drawAvatar();
   //Avatar.moveAvatar();
   moveMyAvatar();
-  Avatar.stop();
+  stop();
   drawSprites();
   //myAvatar.position.x = avatarX;
   //myAvatar.position.y = avatarY;
-  //console.log(oo);
+  console.log(oo);
   wind();
   // collide
   for(var i=0; i<myTree.length; i++){
@@ -187,7 +187,8 @@ function draw() {
       BFlowers[i].position.y = myAvatar.position.y+(i*p);
       //console.log(l);
   }
-}
+  someText();
+} // end of draw()
 
 function moveMyAvatar(){
   myAvatar.position.x+= avatarVX;
@@ -206,11 +207,75 @@ function moveMyAvatar(){
   }
 }
 
+function handleInput() {
+  // Check for horizontal movement
+  if (keyIsDown(LEFT_ARROW)) {
+    avatarVX = -avatarSpeed;
+    orientation = animLEFT;
+    oo = "LEFT";
+  }
+  else if (keyIsDown(RIGHT_ARROW)) {
+    avatarVX = avatarSpeed;
+    orientation = animRIGHT;
+    oo = "RIGHT";
+  }
+  else {
+    avatarVX = 0;
+  }
+
+  // Check for vertical movement
+  if (keyIsDown(UP_ARROW)) {
+    avatarVY = -avatarSpeed;
+    orientation = animUP;
+    oo = "UP";
+  }
+  else if (keyIsDown(DOWN_ARROW)) {
+    avatarVY = avatarSpeed;
+    orientation = animDOWN;
+    oo = "DOWN";
+  }
+  else {
+    avatarVY = 0;
+  }
+}
+
+function stop(){
+  if (avatarVX === 0 && avatarVY ===0){
+    if (orientation === animLEFT){
+      myAvatar.addAnimation("default", animSLEFT);
+    }
+    else if (orientation === animRIGHT){
+      myAvatar.addAnimation("default", animSRIGHT);
+    }
+    else if (orientation === animDOWN){
+      myAvatar.addAnimation("default", animSDOWN);
+    }
+    else if (orientation === animUP){
+      myAvatar.addAnimation("default", animSUP);
+    }
+  }
+}
+
 // to resize window
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
+function someText(){
+  if (tbool === false){
+    fill(36, 86, 193);
+    rectMode(CENTER);
+    rect(width-160,57,210,60);
+    textSize(20);
+    textFont("helvetica");
+    textStyle("bold");
+    fill(255);
+    textAlign(CENTER);
+    text("press ENTER to \nplay or stop music :)", width-160, 50);
+  }
+  else {}
+
+}
 // wind / cloud test
 function wind() {
   rectX += 2;
@@ -309,6 +374,7 @@ function keyPressed() {
     if (sbool === false){
         song.loop();
         sbool = true;
+        tbool = true;
     }
     else if (sbool === true){
       song.stop();
@@ -370,99 +436,63 @@ function keyReleased() {
   }
 }
 
-// avatar creation
-let Avatar = new avatar(0,0,80,80,0,0,4,"");
-
-// Avatar class
-function avatar(x, y, w, h, vx, vy, s, o){
-  avatarX=x;
-  avatarY=y;
-  avatarWidth=w;
-  avatarHeight=h;
-  avatarVX=vx;
-  avatarVY=vy;
-  avatarSpeed=s;
-  orientation=o;
-
-  this.setupAvatar = function(){
-    avatarX = width/2;
-    avatarY = height/2;
-  }
-
-  this.drawAvatar = function(){
-    ellipse(avatarX,avatarY,avatarWidth,avatarHeight);
-  }
-
-  this.moveAvatar = function(){
-    avatarX += avatarVX;
-    avatarY += avatarVY;
-    if (avatarX < 0){
-      avatarX= 0;
-    }
-    if (avatarX > width){
-      avatarX = width;
-    }
-    if (avatarY < 0){
-      avatarY = 0;
-    }
-    if (avatarY > height){
-      avatarY = height;
-    }
-  }
-
-  this.handleInput = function() {
-    // Check for horizontal movement
-    if (keyIsDown(LEFT_ARROW)) {
-      avatarVX = -avatarSpeed;
-      orientation = animLEFT;
-      oo = "LEFT";
-    }
-    else if (keyIsDown(RIGHT_ARROW)) {
-      avatarVX = avatarSpeed;
-      orientation = animRIGHT;
-      oo = "RIGHT";
-    }
-    else {
-      avatarVX = 0;
-    }
-
-    // Check for vertical movement
-    if (keyIsDown(UP_ARROW)) {
-      avatarVY = -avatarSpeed;
-      orientation = animUP;
-      oo = "UP";
-    }
-    else if (keyIsDown(DOWN_ARROW)) {
-      avatarVY = avatarSpeed;
-      orientation = animDOWN;
-      oo = "DOWN";
-    }
-    else {
-      avatarVY = 0;
-    }
-  }
-
-  this.stop = function(){
-    if (avatarVX === 0 && avatarVY ===0){
-      if (orientation === animLEFT){
-        myAvatar.addAnimation("default", animSLEFT);
-      }
-      else if (orientation === animRIGHT){
-        myAvatar.addAnimation("default", animSRIGHT);
-      }
-      else if (orientation === animDOWN){
-        myAvatar.addAnimation("default", animSDOWN);
-      }
-      else if (orientation === animUP){
-        myAvatar.addAnimation("default", animSUP);
-      }
-    }
-  }
-
-  this.pickFlower = function(){
-    var d = dist(avatarX,avatarY,aFlower.xPos,aFlower.yPos);
-    if (d < avatarWidth + aFlower.width){
-
-    }
-  }
-} // end of Avatar class
+// // avatar creation
+// let Avatar = new avatar(0,0,80,80,0,0,4,"");
+//
+// // Avatar class
+// function avatar(x, y, w, h, vx, vy, s, o){
+//   avatarX=x;
+//   avatarY=y;
+//   avatarWidth=w;
+//   avatarHeight=h;
+//   avatarVX=vx;
+//   avatarVY=vy;
+//   avatarSpeed=s;
+//   orientation=o;
+//
+//   this.setupAvatar = function(){
+//     avatarX = width/2;
+//     avatarY = height/2;
+//   }
+//
+//   this.drawAvatar = function(){
+//     ellipse(avatarX,avatarY,avatarWidth,avatarHeight);
+//   }
+//
+//   this.moveAvatar = function(){
+//     avatarX += avatarVX;
+//     avatarY += avatarVY;
+//     if (avatarX < 0){
+//       avatarX= 0;
+//     }
+//     if (avatarX > width){
+//       avatarX = width;
+//     }
+//     if (avatarY < 0){
+//       avatarY = 0;
+//     }
+//     if (avatarY > height){
+//       avatarY = height;
+//     }
+//   }
+//
+//
+//
+//   this.stop = function(){
+//     if (avatarVX === 0 && avatarVY ===0){
+//       if (orientation === animLEFT){
+//         myAvatar.addAnimation("default", animSLEFT);
+//       }
+//       else if (orientation === animRIGHT){
+//         myAvatar.addAnimation("default", animSRIGHT);
+//       }
+//       else if (orientation === animDOWN){
+//         myAvatar.addAnimation("default", animSDOWN);
+//       }
+//       else if (orientation === animUP){
+//         myAvatar.addAnimation("default", animSUP);
+//       }
+//     }
+//   }
+//
+// } // end of Avatar class
