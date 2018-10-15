@@ -183,8 +183,8 @@ function draw() {
       l = Math.sin(i);
       let p = 0;
       p = Math.cos(i);
-      BFlowers[i].position.x = myAvatar.position.x+20+(i*l);
-      BFlowers[i].position.y = myAvatar.position.y+(i*p);
+      BFlowers[i].position.x = myAvatar.position.x+20+(i/1.5*l);
+      BFlowers[i].position.y = myAvatar.position.y+(i/1.5*p);
       //console.log(l);
   }
   someText();
@@ -354,20 +354,20 @@ function keyPressed() {
           newBFlower.addToGroup(BFlowers);
         }
       }
-    }
+  }
 
-    for(var j = 0; j<TRFlowers.length;j++){
-        var f = TRFlowers[j];
-        if(keyCode === SHIFT){
-          if(myAvatar.overlap(TRFlowers[j])){
-            TRFlowers[j].remove();
-            //console.log("overlap");
-            newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
-            newBFlower.addAnimation("default",spriteTRFlower);
-            newBFlower.addToGroup(BFlowers);
-          }
+  for(var j = 0; j<TRFlowers.length;j++){
+      var f = TRFlowers[j];
+      if(keyCode === SHIFT){
+        if(myAvatar.overlap(TRFlowers[j])){
+          TRFlowers[j].remove();
+          //console.log("overlap");
+          newBFlower = createSprite(myAvatar.position.x,myAvatar.position.y,5,5);
+          newBFlower.addAnimation("default",spriteTRFlower);
+          newBFlower.addToGroup(BFlowers);
         }
       }
+  }
 
   // enter for song
   if (keyCode === ENTER){
@@ -397,7 +397,7 @@ function keyPressed() {
   if (lea === true){
     myAvatar.addAnimation("default", animLEFT);
   }
-  if (ria === true){
+  else if (ria === true){
     myAvatar.addAnimation("default", animRIGHT);
   }
   if (doa === true){
