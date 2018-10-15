@@ -1,20 +1,12 @@
-
-
-
-
 * {
     box-sizing: border-box;
     text-decoration: none;
       color: rgb(49, 50, 64);
-
-
 }
-
-
 
 body{
   background-color:rgb(138, 215, 76);
-font-family: 'Niramit', sans-serif;
+  font-family: 'Niramit', sans-serif;
   text-align: center;
   color: rgb(49, 50, 64);
   text-decoration: initial;
@@ -37,6 +29,7 @@ h3{
   font-size: 28px;
   margin:20px;
 }
+
 p{
   margin:10px;
 }
@@ -52,23 +45,17 @@ p{
   right:10%;
   background-color:rgb(138, 215, 76);
 }
+
 #text{
   filter:opacity(100%);
 }
 
 .button_style{
-
-
-    border-radius: 60px;
-    font-family: 'Gloria Hallelujah', cursive;
-    width: 240px;
-    height: 50px;
-    font-size: 24px;
-    background-color:rgb(220, 228, 178);
-    text-decoration:none;
-
-
-
-
-
+  border-radius: 60px;
+  font-family: 'Gloria Hallelujah', cursive;
+  width: 240px;
+  height: 50px;
+  font-size: 24px;
+  background-color:rgb(220, 228, 178);
+  text-decoration:none;
 }

@@ -6,97 +6,83 @@
   <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
   <!-- CSS stylesheet(s) -->
   <link rel="stylesheet" type="text/css" href="css/styles2.css" />
-
   <!-- Library script(s) -->
   <script src="js/libraries/p5.min.js"></script>
   <script src="js/libraries/p5.sound.min.js"></script>
   <script src="js/libraries/p5.play.js"></script>
-
   <!-- My script(s) -->
   <script src="js/script.js"></script>
 
   <title> Picking flowers </title>
   </head>
   <body>
-
     <script>
+      window.onload = function(){
+        document.getElementById("butt1").addEventListener("mouseover", opa_in_butt1)
+        document.getElementById("butt1").addEventListener("mouseout", opa_out_butt1)
+        document.getElementById("butt2").addEventListener("mouseover", opa_in_butt2)
+        document.getElementById("butt2").addEventListener("mouseout", opa_out_butt2)
+        document.getElementById("butt3").addEventListener("mouseover", opa_in_butt3)
+        document.getElementById("butt3").addEventListener("mouseout", opa_out_butt3)
+        document.getElementById("butt4").addEventListener("mouseover", opa_in_butt4)
+        document.getElementById("butt4").addEventListener("mouseout", opa_out_butt4)
 
-    window.onload = function(){
+        function opa_in_butt1(event)
+        {
+            document.getElementById("butt1").style.background="rgb(214, 211, 137)";
+        }
+        function opa_out_butt1(event)
+        {
+            document.getElementById("butt1").style.background="rgb(220, 228, 178)";
+        }
+        function opa_in_butt2(event)
+        {
+            document.getElementById("butt2").style.background="rgb(214, 211, 137)";
 
-      document.getElementById("butt1").addEventListener("mouseover", opa_in_butt1)
-      document.getElementById("butt1").addEventListener("mouseout", opa_out_butt1)
-      document.getElementById("butt2").addEventListener("mouseover", opa_in_butt2)
-      document.getElementById("butt2").addEventListener("mouseout", opa_out_butt2)
-      document.getElementById("butt3").addEventListener("mouseover", opa_in_butt3)
-      document.getElementById("butt3").addEventListener("mouseout", opa_out_butt3)
-      document.getElementById("butt4").addEventListener("mouseover", opa_in_butt4)
-      document.getElementById("butt4").addEventListener("mouseout", opa_out_butt4)
+        }
+        function opa_out_butt2(event)
+        {
+            document.getElementById("butt2").style.background="rgb(220, 228, 178)";
 
-      function opa_in_butt1(event)
-      {
-          document.getElementById("butt1").style.background="rgb(214, 211, 137)";
+        }
+        function opa_in_butt3(event)
+        {
+            document.getElementById("butt3").style.background="rgb(214, 211, 137)";
+
+        }
+        function opa_out_butt3(event)
+        {
+            document.getElementById("butt3").style.background="rgb(220, 228, 178)";
+
+        }
+        function opa_in_butt4(event)
+        {
+            document.getElementById("butt4").style.background="rgb(214, 211, 137)";
+
+        }
+        function opa_out_butt4(event)
+        {
+            document.getElementById("butt4").style.background="rgb(220, 228, 178)";
+
+        }
       }
-      function opa_out_butt1(event)
-      {
-          document.getElementById("butt1").style.background="rgb(220, 228, 178)";
-      }
-
-
-      function opa_in_butt2(event)
-      {
-          document.getElementById("butt2").style.background="rgb(214, 211, 137)";
-
-      }
-      function opa_out_butt2(event)
-      {
-          document.getElementById("butt2").style.background="rgb(220, 228, 178)";
-
-      }
-
-
-      function opa_in_butt3(event)
-      {
-          document.getElementById("butt3").style.background="rgb(214, 211, 137)";
-
-      }
-      function opa_out_butt3(event)
-      {
-          document.getElementById("butt3").style.background="rgb(220, 228, 178)";
-
-      }
-
-      function opa_in_butt4(event)
-      {
-          document.getElementById("butt4").style.background="rgb(214, 211, 137)";
-
-      }
-      function opa_out_butt4(event)
-      {
-          document.getElementById("butt4").style.background="rgb(220, 228, 178)";
-
-      }
-    }
-
-
-
     </script>
     <div id="items">
-    <div id="text">
-      <h1>Dreaming of <img id"whiteFlower" src="assets/images/whiteFlower.png">   all day? We do too.</h2>
-      <h2>Let us satisfy (virtually) your desires!</h2>
-      <h3>But first, tell us how much you love flowers.</h3>
-      <p>(It will help us to gage how big you'd like your bouquet)</p>
-
-        <div class="buttons">
-        <button onclick="butt1click()"  id="butt1" class="button_style">A little</button>
-        <button onclick="butt2click()"  id="butt2" class="button_style">A lot</button>
-        <button onclick="butt3click()"  id="butt3" class="button_style">Enormously</button>
-        <button onclick="butt4click()"  id="butt4" class="button_style">To madness</button>
+      <div id="text">
+        <h1>Dreaming of <img id"whiteFlower" src="assets/images/whiteFlower.png">   all day? We do too.</h2>
+        <h2>Let us satisfy (virtually) your desires!</h2>
+        <h3>But first, tell us how much you love flowers.</h3>
+        <p>(It will help us to gage how big you'd like your bouquet)</p>
+          <div class="buttons">
+          <button onclick="butt1click()"  id="butt1" class="button_style">A little</button>
+          <button onclick="butt2click()"  id="butt2" class="button_style">A lot</button>
+          <button onclick="butt3click()"  id="butt3" class="button_style">Enormously</button>
+          <button onclick="butt4click()"  id="butt4" class="button_style">To madness</button>
+        </div>
+        <p>Use the arrow keys to move and press SHIFT to pick them up!</p>
+        <p>You can also press ENTER for some music!</p>
       </div>
-      <p>Use the arrow keys to move and press SHIFT to pick them up!</p>
-      <p>You can also press ENTER for some music!</p>
     </div>
-  </div>
     <!--<canvas id="testCanvas" style = 'position: absolute; left: 0px; top: 0px;' >
   	</canvas>-->
   </body>
